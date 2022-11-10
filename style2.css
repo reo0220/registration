@@ -40,6 +40,21 @@ label {
     float: left;
 }
 
+.h2{
+    margin-bottom: 200px;
+}
+
+.center{
+    text-align: center;
+    margin-bottom: 250px;
+}
+
+
+.z{
+    text-align: center;
+
+}
+
 footer{
     position: fixed;
     left: 0;
@@ -49,4 +64,5 @@ footer{
     text-align: center;
     width: 100%;
     height: 40px;
+    margin-top: 10px;
 }
