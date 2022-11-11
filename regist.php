@@ -25,32 +25,32 @@
                 <ul class = "ul">
                     <li>
                         <labal>名前（姓）</label>
-                        <input type = "text" name = "family_name" maxlength = "10" pattern="[\u4E00-\u9FFF\u3040-\u309Fー]*">
+                        <input type = "text" name = "family_name" pattern="[\u4E00-\u9FFF\u3040-\u309Fー]{0,10}"><!--漢字、ひらがな 10文字まで-->
                         <span class = "alertarea"></span>
                     </li>
                     <li> 
                         <label>名前（名）</label>
-                        <input type = "text" name = "last_name" maxlength = "10" pattern="[\u4E00-\u9FFF\u3040-\u309Fー]*">
+                        <input type = "text" name = "last_name" maxlength = "10" pattern="[\u4E00-\u9FFF\u3040-\u309Fー]{0,10}">
                         <span class = "alertarea"></span>
                     </li>
                     <li>
                         <label>カナ（姓）</label>
-                        <input type = "text" name = "family_name_kana" maxlength = "10" pattern="[\u30A1-\u30F6]*">
+                        <input type = "text" name = "family_name_kana" pattern="[\u30A1-\u30F6]{0,10}"><!--カタカナ 10文字まで-->
                         <span class = "alertarea"></span>
                     </li>
                     <li>
                         <label>カナ（名）</label>
-                        <input type = "text" name = "last_name_kana" maxlength = "10" pattern="[\u30A1-\u30F6]*">
+                        <input type = "text" name = "last_name_kana" pattern="[\u30A1-\u30F6]{0,10}">
                         <span class = "alertarea"></span>
                     </li>
                     <li>
                         <label>メールアドレス</label>
-                        <input type = "email" name = "mail" maxlength = "100">
+                        <input type = "text" name = "mail" pattern = "[0-9a-zA-Z-]+@[0-9a-zA-Z-]{0,100}"><!--半角英数字とハイフンと＠ 100文字まで-->
                         <span class = "alertarea"></span>
                     </li>
                     <li>
                         <label>パスワード</label>
-                        <input type = "password" name = "password" maxlength = "10" pattern = "/^[0-9a-zA-Z]*$/" >
+                        <input type = "password" name = "password" pattern = "[0-9a-zA-Z]{0,10}"> <!--半角英数字10文字まで-->
                         <span class = "alertarea"></span>
                     </li>  
                     <li>
@@ -61,7 +61,7 @@
                     </li> 
                     <li>  
                         <label>郵便番号</label>
-                        <input type = "text" name = "postal_code" maxlength = "7">
+                        <input type = "text" name = "postal_code" maxlength = "7" pattern = "[0-9]{0,7}"><!--半角数字 7文字まで-->
                         <span class = "alertarea"></span>
                     </li>  
                     <li>
@@ -120,12 +120,12 @@
                     </li>
                     <li>
                         <label>都道府県（市区町村）</label>
-                        <input type = "text" name = "address_1" maxlength = "10" >
+                        <input type = "text" name = "address_1" pattern = "[\u4E00-\u9FFF\u3040-\u309Fー0-9０-９\s-]{0,10}"><!--漢字ひらがな、カタカナ、数字、ハイフン、スペース　10文字-->
                         <span class = "alertarea"></span>
                     </li>                                       
                     <li>
                         <label>都道府県（番地）</label>
-                        <input type = "text" name = "address_2" maxlength = "100" >
+                        <input type = "text" name = "address_2" pattern = "[\u4E00-\u9FFF\u3040-\u309Fー0-9０-９-\s]{0,10}">
                         <span class = "alertarea"></span>
                     </li>                                                       
                     <li>
