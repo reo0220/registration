@@ -37,7 +37,10 @@
         <?php echo $_POST ['mail'];?>
         </p>
         <p>パスワード
-        <?php echo $_POST ['password'];?>
+        <?php
+        for($i = 0;$i < mb_strlen($_POST ['password']);$i++){ //文字数分●表示
+               echo "●"; 
+        };?>
         </p>
         <p>性別
         <?php echo $_POST ['gender'];?>
@@ -69,13 +72,21 @@
             <input type = "hidden" value = "<?php echo $_POST['family_name_kana'];?>" name = "family_name_kana">
             <input type = "hidden" value = "<?php echo $_POST['last_name_kana'];?>" name = "last_name_kana">
             <input type = "hidden" value = "<?php echo $_POST['mail'];?>" name = "mail">
-            <input type = "hidden" value = "<?php echo $_POST['password'];?>" name = "password">
-            <input type = "hidden" value = "<?php echo $_POST['gender'];?>" name = "gender">
+            <input type = "hidden" value = "<?php echo password_hash($_POST['password'],PASSWORD_DEFAULT);?>" name = "password"><!--パスワードハッシュ化-->
+            <input type = "hidden" value = "<?php if($_POST['gender'] == "男"){  //男を選択した場合０、女の場合１
+                                                        echo 0;
+                                                    } else{
+                                                        echo 1;
+                                                    }?>" name = "gender">
             <input type = "hidden" value = "<?php echo $_POST['postal_code'];?>" name = "postal_code">
             <input type = "hidden" value = "<?php echo $_POST['prefecture'];?>" name = "prefecture">
             <input type = "hidden" value = "<?php echo $_POST['address_1'];?>" name = "address_1">
             <input type = "hidden" value = "<?php echo $_POST['address_2'];?>" name = "address_2">
-            <input type = "hidden" value = "<?php echo $_POST['authority'];?>" name = "authority">
+            <input type = "hidden" value = "<?php if($_POST['authority'] == "一般"){  //一般を選択した場合０、管理者を選択した場合１
+                                                        echo 0;
+                                                    } else{
+                                                        echo 1;
+                                                    }?>" name = "authority">
         </form>    
     </div>
     <footer>Copyright D.I.Works | D.I.blog is the one which provides A to Z about programming</footer>

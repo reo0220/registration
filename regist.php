@@ -50,7 +50,7 @@
                     </li>
                     <li>
                         <label>パスワード</label>
-                        <input type = "password" name = "password" pattern = "[0-9a-zA-Z]{0,10}"> <!--半角英数字10文字まで-->
+                        <input type = "text" name = "password" pattern = "[0-9a-zA-Z]{0,10}"> <!--半角英数字10文字まで-->
                         <span class = "alertarea"></span>
                     </li>  
                     <li>
