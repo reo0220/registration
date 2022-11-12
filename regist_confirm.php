@@ -72,7 +72,7 @@
             <input type = "hidden" value = "<?php echo $_POST['family_name_kana'];?>" name = "family_name_kana">
             <input type = "hidden" value = "<?php echo $_POST['last_name_kana'];?>" name = "last_name_kana">
             <input type = "hidden" value = "<?php echo $_POST['mail'];?>" name = "mail">
-            <input type = "hidden" value = "<?php echo password_hash($_POST['password'],PASSWORD_DEFAULT);?>" name = "password"><!--パスワードハッシュ化-->
+            <input type = "hidden" value = "<?php echo $_POST['password'];?>" name = "password">
             <input type = "hidden" value = "<?php if($_POST['gender'] == "男"){  //男を選択した場合０、女の場合１
                                                         echo 0;
                                                     } else{
