@@ -28,17 +28,36 @@ a:hover{
     color: #66FFFF
 }
 .ul{
+    width: 500px;
     margin: 0 auto;
 }
 
 .ul li {
     list-style: none;
+    margin-bottom: 20px;
 }
 
-label {
+.form_name {
     margin-right: 10px;
+    width: 170px;
     float: left;
 }
+.submit{
+    display: block;
+    margin: 0 auto;
+}
+.text-danger{
+    color: red;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 180px; 
+}
+.botton1{
+    float: left;
+    margin-left: 15px;
+    margin-right:40px;
+}
+
 
 .h2{
     margin-bottom: 200px;

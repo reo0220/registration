@@ -1,9 +1,63 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST'): {
+      //var_dump($_POST);
+    //if($_POST !== 0){
+        //header("Location:http://localhost/registration/regist_confirm.php");
+    //}else{
+    $family_name = $_POST['family_name'];
+if($family_name === ""){
+    $error1 = "名前（姓）が未入力です。";
+}
+$last_name = $_POST['last_name'];
+if($last_name === ""){
+    $error2 = "名前(名)が未入力です。";
+}
+$family_name_kana = $_POST['family_name_kana'];
+if($family_name_kana === ""){
+    $error3 = "カナ（姓）が未入力です。";
+}
+$last_name_kana = $_POST['last_name_kana'];
+if($last_name_kana === ""){
+    $error4 = "カナ（名）が未入力です。";
+}
+$mail = $_POST['mail'];
+if($mail === ""){
+    $error5 = "メールアドレスが未入力です。";
+}
+$password = $_POST['password'];
+if($password === ""){
+    $error6 = "パスワードが未入力です。";
+}
+$postal_code = $_POST['postal_code'];
+if($postal_code === ""){
+    $error7 = "郵便番号が未入力です。";
+}
+$prefecture = $_POST['prefecture'];
+if($prefecture === ""){
+    $error8 = "住所（都道府県）が未入力です。";
+}
+$address_1 = $_POST['address_1'];
+if($address_1 === ""){
+    $error9 = "都道府県（市区町村）が未入力です。";
+}
+$address_2 = $_POST['address_2'];
+if($address_2 === ""){
+    $error10 = "都道府県（番地）が未入力です。";
+}
+//if(!empty($family_name)){
+    //header("Location:http://localhost/registration/regist_confirm.php");
+//}
+    }
+?>
+<?php endif;?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <link rel = "stylesheet" type = "text/css" href = "style2.css">
     <title>アカウント登録画面</title>
+    
 </head>
 <body>
     <img src ="diblog_logo.jpg">
@@ -21,53 +75,66 @@
     <main>
         <h2>アカウント登録画面</h2>
         
-            <form  class = "form" action = "regist_confirm.php" method = "POST">
+            <form  name = "form" action = "regist.php" method = "POST">
                 <ul class = "ul">
                     <li>
-                        <labal>名前（姓）</label>
-                        <input type = "text" name = "family_name" pattern="[\u4E00-\u9FFF\u3040-\u309Fー]{0,10}"><!--漢字、ひらがな 10文字まで-->
-                        <span class = "alertarea"></span>
+                        <label class = "form_name" id = "formname_1">名前（姓）</label>
+                        <input type = "text" name = "family_name" pattern="[\u4E00-\u9FFF\u3040-\u309Fー]{0,10}" value=<?php if($_SERVER['REQUEST_METHOD'] === 'POST'){echo $family_name;}else{echo"";}?> ><!--漢字、ひらがな 10文字まで-->
+                        <?php if(!empty($error1)):?>
+                            <p class="text-danger"><?php echo $error1 ?></p>
+                        <?php endif; ?>
                     </li>
                     <li> 
-                        <label>名前（名）</label>
-                        <input type = "text" name = "last_name" maxlength = "10" pattern="[\u4E00-\u9FFF\u3040-\u309Fー]{0,10}">
-                        <span class = "alertarea"></span>
+                        <label class = "form_name">名前（名）</label>
+                        <input type = "text" name = "last_name" maxlength = "10" pattern="[\u4E00-\u9FFF\u3040-\u309Fー]{0,10}" value=<?php if($_SERVER['REQUEST_METHOD'] === 'POST'){echo $last_name;}else{echo"";}?>>
+                        <?php if(!empty($error2)):?>
+                            <p class="text-danger"><?php echo $error2 ?></p>
+                        <?php endif; ?>
                     </li>
                     <li>
-                        <label>カナ（姓）</label>
-                        <input type = "text" name = "family_name_kana" pattern="[\u30A1-\u30F6]{0,10}"><!--カタカナ 10文字まで-->
-                        <span class = "alertarea"></span>
+                        <label class = "form_name">カナ（姓）</label>
+                        <input type = "text" name = "family_name_kana" class = "form_item" pattern="[\u30A1-\u30F6]{0,10}" value=<?php if($_SERVER['REQUEST_METHOD'] === 'POST'){echo $family_name_kana;}else{echo"";}?>><!--カタカナ 10文字まで-->
+                        <?php if(!empty($error3)):?>
+                            <p class="text-danger"><?php echo $error3 ?></p>
+                        <?php endif; ?>
                     </li>
                     <li>
-                        <label>カナ（名）</label>
-                        <input type = "text" name = "last_name_kana" pattern="[\u30A1-\u30F6]{0,10}">
-                        <span class = "alertarea"></span>
+                        <label class = "form_name">カナ（名）</label>
+                        <input type = "text" name = "last_name_kana" class = "form_item" pattern="[\u30A1-\u30F6]{0,10}" value=<?php if($_SERVER['REQUEST_METHOD'] === 'POST'){echo $last_name_kana;}else{echo"";}?>>
+                        <?php if(!empty($error4)):?>
+                            <p class="text-danger"><?php echo $error4 ?></p>
+                        <?php endif; ?>
                     </li>
                     <li>
-                        <label>メールアドレス</label>
-                        <input type = "text" name = "mail" pattern = "[0-9a-zA-Z-]+@[0-9a-zA-Z-]{0,100}"><!--半角英数字とハイフンと＠ 100文字まで-->
-                        <span class = "alertarea"></span>
+                        <label class = "form_name">メールアドレス</label>
+                        <input type = "text" name = "mail" class = "form_item" pattern = "[0-9a-zA-Z_\.-]+@[0-9a-zA-Z_\.-]{0,100}" value=<?php if($_SERVER['REQUEST_METHOD'] === 'POST'){echo $mail;}else{echo"";}?>><!--半角英数字とハイフンと＠と＿とドット 100文字まで-->
+                        <?php if(!empty($error5)):?>
+                            <p class="text-danger"><?php echo $error5 ?></p>
+                        <?php endif; ?>
                     </li>
                     <li>
-                        <label>パスワード</label>
-                        <input type = "text" name = "password" pattern = "[0-9a-zA-Z]{0,10}"> <!--半角英数字10文字まで-->
-                        <span class = "alertarea"></span>
+                        <label class = "form_name">パスワード</label>
+                        <input type = "text" name = "password" class = "form_item" pattern = "[0-9a-zA-Z]{0,10}" value=<?php if($_SERVER['REQUEST_METHOD'] === 'POST'){echo $password;}else{echo"";}?>> <!--半角英数字10文字まで-->
+                        <?php if(!empty($error6)):?>
+                            <p class="text-danger"><?php echo $error6 ?></p>
+                        <?php endif; ?>
                     </li>  
                     <li>
-                        <label>性別</label>
+                        <label class = "form_name">性別</label>
                         <input type="radio" name="gender" value="男" checked> 男
                         <input type="radio" name="gender"value="女"> 女
-                        <span class = "alertarea"></span>
                     </li> 
                     <li>  
-                        <label>郵便番号</label>
-                        <input type = "text" name = "postal_code" maxlength = "7" pattern = "[0-9]{0,7}"><!--半角数字 7文字まで-->
-                        <span class = "alertarea"></span>
+                        <label class = "form_name">郵便番号</label>
+                        <input type = "text" name = "postal_code" class = "form_item" maxlength = "7" pattern = "[0-9]{0,7}" value=<?php if($_SERVER['REQUEST_METHOD'] === 'POST'){echo $postal_code;}else{echo"";}?>><!--半角数字 7文字まで-->
+                        <?php if(!empty($error7)):?>
+                            <p class="text-danger"><?php echo $error7 ?></p>
+                        <?php endif; ?>
                     </li>  
                     <li>
-                        <label>住所（都道府県）</label>
-                        <select class = "dropdown" name="prefecture">
-                            <option></option>
+                        <label class = "form_name">住所（都道府県）</label>
+                        <select class = "form_item" name="prefecture">
+                            <option value=<?php if($_SERVER['REQUEST_METHOD'] === 'POST'){echo $prefecture;}else{echo"";}?>></option>
                             <option value="北海道">北海道</option>
                             <option value="青森県">青森県</option>
                             <option value="岩手県">岩手県</option>
@@ -116,21 +183,27 @@
                             <option value="鹿児島県">鹿児島県</option>
                             <option value="沖縄県">沖縄県</option>
                         </select>
-                        <span class = "alertarea"></span>
+                        <?php if(!empty($error8)):?>
+                            <p class="text-danger"><?php echo $error8 ?></p>
+                        <?php endif; ?>
                     </li>
                     <li>
-                        <label>都道府県（市区町村）</label>
-                        <input type = "text" name = "address_1" pattern = "[\u4E00-\u9FFF\u3040-\u309Fー0-9０-９\s-]{0,10}"><!--漢字ひらがな、カタカナ、数字、ハイフン、スペース　10文字-->
-                        <span class = "alertarea"></span>
+                        <label class = "form_name">都道府県（市区町村）</label>
+                        <input type = "text" name = "address_1" class = "form_item" pattern = "[\u4E00-\u9FFF\u3040-\u309Fー0-9０-９\s-]{0,10}" value=<?php if($_SERVER['REQUEST_METHOD'] === 'POST'){echo $address_1;}else{echo"";}?>><!--漢字ひらがな、カタカナ、数字、ハイフン、スペース　10文字-->
+                        <?php if(!empty($error9)):?>
+                            <p class="text-danger"><?php echo $error9 ?></p>
+                        <?php endif; ?>
                     </li>                                       
                     <li>
-                        <label>都道府県（番地）</label>
-                        <input type = "text" name = "address_2" pattern = "[\u4E00-\u9FFF\u3040-\u309Fー0-9０-９-\s]{0,10}">
-                        <span class = "alertarea"></span>
+                        <label class = "form_name">都道府県（番地）</label>
+                        <input type = "text" name = "address_2" class = "form_item" pattern = "[\u4E00-\u9FFF\u3040-\u309Fー0-9０-９-\s]{0,10}" value=<?php if($_SERVER['REQUEST_METHOD'] === 'POST'){echo $address_2;}else{echo"";}?>>
+                        <?php if(!empty($error10)):?>
+                            <p class="text-danger"><?php echo $error10 ?></p>
+                        <?php endif; ?>
                     </li>                                                       
                     <li>
-                        <label>アカウント権限</label>
-                        <select class = "dropdown" name = "authority">
+                        <label class = "form_name">アカウント権限</label>
+                        <select name = "authority">
                             <option value ="一般">一般</option>
                             <option value="管理者">管理者</option>
                         </select>

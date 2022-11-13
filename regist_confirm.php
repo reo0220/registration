@@ -19,47 +19,58 @@
             <li>その他</li>
         </ul>
         <h2>アカウント登録確認画面</h2>
-        <div class = "confilm">
-
-        <p>名前(姓）
-        <?php echo $_POST ['family_name'];?>
-        </p>
-        <p>名前(名）
-        <?php echo $_POST ['last_name'];?>
-        </p>
-        <p>カナ(姓）
-        <?php echo $_POST ['family_name_kana'];?>
-        </p>
-        <p>カナ（名）
-        <?php echo $_POST ['last_name_kana'];?>
-        </p>
-        <p>メールアドレス
-        <?php echo $_POST ['mail'];?>
-        </p>
-        <p>パスワード
-        <?php
-        for($i = 0;$i < mb_strlen($_POST ['password']);$i++){ //文字数分●表示
-               echo "●"; 
-        };?>
-        </p>
-        <p>性別
-        <?php echo $_POST ['gender'];?>
-        </p>
-        <p>郵便番号
-        <?php echo $_POST ['postal_code'];?>
-        </p>
-        <p>住所（都道府県）
-        <?php echo $_POST ['prefecture'];?>
-        </p>
-        <p>住所（市区町村）
-        <?php echo $_POST ['address_1'];?>
-        </p>
-        <p>住所（番地）
-        <?php echo $_POST ['address_2'];?>
-        </p>    
-        <p>アカウント権限
-        <?php echo $_POST ['authority'];?>
-        </p>    
+        <ul class = "ul">
+            <li>
+                <label class ="form_name">名前（姓）</label>
+                <p><?php echo $_POST ['family_name'];?></p>
+            </li>
+            <li>
+                <label class ="form_name">名前（名）</label>
+                <p><?php echo $_POST ['last_name'];?></p>
+            </li>
+            <li>
+                <label class ="form_name">カナ（姓）</label>
+                <p><?php echo $_POST ['family_name_kana'];?></p>
+            </li>
+            <li>
+                <label class ="form_name">カナ（名）</label>
+                <p><?php echo $_POST ['last_name_kana'];?></p>
+            </li>
+            <li>
+                <label class ="form_name">メールアドレス</label>
+                <p><?php echo $_POST ['mail'];?></p>
+            </li>
+            <li>
+                <label class ="form_name">パスワード</label>
+                <p><?php
+                    for($i = 0;$i < mb_strlen($_POST ['password']);$i++){ //文字数分●表示
+                            echo "●"; 
+                    };?></p>
+            </li>
+            <li>
+                <label class ="form_name">性別</label>
+                <p><?php echo $_POST ['gender'];?></p>
+            </li>
+            <li>
+                <label class ="form_name">郵便番号</label>
+                <p><?php echo $_POST ['postal_code'];?></p>
+            </li>
+            <li>
+                <label class ="form_name">住所（都道府県）</label>
+                <p><?php echo $_POST ['prefecture'];?></p>
+            </li>
+            <li>
+                <label class ="form_name">都道府県（市区町村）</label>
+                <p><?php echo $_POST ['address_1'];?></p>
+            </li>
+            <li>
+                <label class ="form_name">都道府県（番地）</label>
+                <p><?php echo $_POST ['address_2'];?></p>
+            </li>
+            <li>
+                <label class ="form_name">アカウント権限</label>
+                <p><?php echo $_POST ['authority'];?></p>
+            </li>
         
         <form method = "POST" action ="regist.php">
             <input type = "submit" class = "botton1" value = "前に戻る">
