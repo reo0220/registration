@@ -19,6 +19,7 @@
             <li>その他</li>
         </ul>
         <h2>アカウント登録確認画面</h2>
+        <main>
         <ul class = "ul">
             <li>
                 <label class ="form_name">名前（姓）</label>
@@ -100,6 +101,7 @@
                                                     }?>" name = "authority">
         </form>    
     </div>
+    </main>
     <footer>Copyright D.I.Works | D.I.blog is the one which provides A to Z about programming</footer>
     </body>
 </html>        

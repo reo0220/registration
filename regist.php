@@ -1,9 +1,5 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST'): {
-      //var_dump($_POST);
-    //if($_POST !== 0){
-        //header("Location:http://localhost/registration/regist_confirm.php");
-    //}else{
     $family_name = $_POST['family_name'];
 if($family_name === ""){
     $error1 = "名前（姓）が未入力です。";
@@ -44,9 +40,9 @@ $address_2 = $_POST['address_2'];
 if($address_2 === ""){
     $error10 = "都道府県（番地）が未入力です。";
 }
-//if(!empty($family_name)){
-    //header("Location:http://localhost/registration/regist_confirm.php");
-//}
+if(!empty($family_name) && !empty($last_name) && !empty($family_name_kana) && !empty($last_name_kana) && !empty($mail) && !empty($password) && !empty($postal_code) && !empty($prefecture) && !empty($address_1) && !empty($address_2)){
+    header("Location:http://localhost/registration/regist_confirm.php",true,307);
+}
     }
 ?>
 <?php endif;?>

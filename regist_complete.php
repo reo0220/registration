@@ -29,12 +29,14 @@ values('".$_POST['family_name']."','".$_POST['last_name']."','".$_POST['family_n
         <li>その他</li>
     </ul>
     <h2 class = "h2">アカウント登録完了画面</h2>
+    <main>
     <div class = "center">
         <div class = "center_item"><h1>登録完了しました</h1></div>
     </div>   
     <form class = "z" method = "POST" action ="index.html">
             <input type = "submit" class = "botton3" value = "TOPページに戻る">
-        </form>
+    </form>
+    </main>
     <footer>Copyright D.I.Works | D.I.blog is the one which provides A to Z about programming</footer>
 </body>
 
