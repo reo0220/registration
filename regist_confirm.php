@@ -1,3 +1,18 @@
+<?php
+session_start();//$_SESSION変数の連想配列にPOSTされた値を代入
+$_SESSION['family_name_send'] = $_POST['family_name'];
+$_SESSION['last_name_send'] = $_POST['last_name'];
+$_SESSION['family_name_kana_send'] = $_POST['family_name_kana'];
+$_SESSION['last_name_kana_send'] = $_POST['last_name_kana'];
+$_SESSION['mail_send'] = $_POST['mail'];
+$_SESSION['password_send'] = $_POST['password'];
+$_SESSION['gender_send'] = $_POST['gender'];
+$_SESSION['postal_code_send'] = $_POST['postal_code'];
+$_SESSION['prefecture_send'] = $_POST['prefecture'];
+$_SESSION['address_1_send'] = $_POST['address_1'];
+$_SESSION['address_2_send'] = $_POST['address_2'];
+$_SESSION['authority_send'] = $_POST['authority'];
+?>
 <!DOCTYPE html>
 <html lang ="ja">
     <head>
@@ -73,7 +88,7 @@
                 <p><?php echo $_POST ['authority'];?></p>
             </li>
         
-        <form method = "POST" action ="regist.php">
+        <form method = "GET" action ="regist.php">
             <input type = "submit" class = "botton1" value = "前に戻る">
         </form>
         
