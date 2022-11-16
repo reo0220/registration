@@ -19,15 +19,6 @@ img{
     padding-right: 30px;
 }
 
-a{
-    color:white;
-    text-decoration: none;
-}
-
-a:hover{
-    color: #66FFFF;
-}
-
 main{
     display:flex;
     width: 100%;

@@ -1,3 +1,10 @@
+<?php
+session_start();
+?>
+<?php
+session_destroy();
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -13,10 +20,10 @@
         <li>D.I.Blogについて</li>
         <li>登録フォーム</li>
         <li>問い合わせ</li>
-        <li>
-            <a href = "regist.php">アカウント登録</a>
-        </li>
         <li>その他</li>
+        <li>
+            <button onclick="location.href='regist.php'" class ="btn">アカウント登録</button>
+        </li>
     </ul>
     <main>
         <div class ="left">
