@@ -87,10 +87,10 @@ if(!empty($family_name) && !empty($last_name) && !empty($family_name_kana) && !e
         <li>D.I.Blogについて</li>
         <li>登録フォーム</li>
         <li>問い合わせ</li>
-        <li>
-            <a href = "regist.php">アカウント登録</a>
-        </li>
         <li>その他</li>
+        <li>
+            <button onclick="location.href='regist.php'" class ="btn">アカウント登録</button>
+        </li>
     </ul>
     <main>
         <h2>アカウント登録画面</h2>

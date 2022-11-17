@@ -38,25 +38,25 @@ values('".$_POST['family_name']."','".$_POST['last_name']."','".$_POST['family_n
         <li>D.I.Blogについて</li>
         <li>登録フォーム</li>
         <li>問い合わせ</li>
-        <li>
-            <a href = "regist.php">アカウント登録</a>
-        </li>
         <li>その他</li>
+        <li>
+            <button onclick="location.href='regist.php'" class ="btn">アカウント登録</button>
+        </li>
     </ul>
     <h2 class = "h2">アカウント登録完了画面</h2>
     <main>
-    <div class = "center">
+    <div align="center" class = "center">
          <h1> <?php
-          if(isset($db_error)){
-            echo '<font color="red">';
-            echo $db_error;
-            echo '</font>';
-          }else{
-            echo "登録完了しました";
-          }?>
+                if(isset($db_error)){
+                    echo '<font color="red">';
+                    echo $db_error;
+                    echo '</font>';
+                  }else{
+                      echo "登録完了しました";
+               }?>
           </h1>
     </div>   
-    <button onclick="location.href='index.php'" class ="btn">TOPページへ戻る</button> 
+    <div align ="center"><button onclick="location.href='index.php'" class ="btn" >TOPページへ戻る</button> </div>
     </main>
     <footer>Copyright D.I.Works | D.I.blog is the one which provides A to Z about programming</footer>
 </body>

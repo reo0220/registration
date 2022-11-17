@@ -28,10 +28,10 @@ $_SESSION['authority_send'] = $_POST['authority'];
             <li>D.I.Blogについて</li>
             <li>登録フォーム</li>
             <li>問い合わせ</li>
-            <li>
-                <a href = "regist.php">アカウント登録</a>
-            </li>
             <li>その他</li>
+            <li>
+                <button onclick="location.href='regist.php'" class ="btn">アカウント登録</button>
+            </li>
         </ul>
         <h2>アカウント登録確認画面</h2>
         <main>
