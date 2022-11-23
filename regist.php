@@ -110,7 +110,7 @@ if(!empty($family_name) && !empty($last_name) && !empty($family_name_kana) && !e
                     </li>
                     <li> 
                         <label class = "form_name">名前（名）</label>
-                        <input type = "text" name = "last_name" maxlength = "10" pattern="[\u4E00-\u9FFF\u3040-\u309Fー]{0,10}" value = <?php if(isset($last_name)){
+                        <input type = "text" name = "last_name" pattern="[\u4E00-\u9FFF\u3040-\u309Fー]{0,10}" value = <?php if(isset($last_name)){
                                                                                                                                     echo $last_name;
                                                                                                                                 }elseif(isset($last_name_return)){
                                                                                                                                     echo $last_name_return;                                                                                                                                 
@@ -143,7 +143,7 @@ if(!empty($family_name) && !empty($last_name) && !empty($family_name_kana) && !e
                     </li>
                     <li>
                         <label class = "form_name">メールアドレス</label>
-                        <input type = "text" name = "mail" class = "form_item" pattern = "[0-9a-zA-Z_\.-]+@[0-9a-zA-Z_\.-]{0,100}" value = <?php if(isset($mail)){
+                        <input type = "text" name = "mail" class = "form_item" maxlength = "100" pattern = "[0-9a-zA-Z_\.-]+@[0-9a-zA-Z_\.-]{0,100}" value = <?php if(isset($mail)){
                                                                                                                                     echo $mail;
                                                                                                                                 }elseif(isset($mail_return)){
                                                                                                                                     echo $mail_return;                                                                                                                                 
@@ -433,7 +433,7 @@ if(!empty($family_name) && !empty($last_name) && !empty($family_name_kana) && !e
                     </li>
                     <li>
                         <label class = "form_name">都道府県（市区町村）</label>
-                        <input type = "text" name = "address_1" class = "form_item" pattern = "[\u4E00-\u9FFF\u3040-\u309Fー0-9０-９\s-]{0,10}" value = <?php if(isset($address_1)){
+                        <input type = "text" name = "address_1" class = "form_item" pattern = "[\u30A1-\u30F6\u4E00-\u9FFF\u3040-\u309Fー0-9０-９\s-ー]{0,10}" value = <?php if(isset($address_1)){
                                                                                                                                     echo $address_1;
                                                                                                                                 }elseif(isset($address_1_return)){
                                                                                                                                     echo $address_1_return;                                                                                                                                 
@@ -444,7 +444,7 @@ if(!empty($family_name) && !empty($last_name) && !empty($family_name_kana) && !e
                     </li>                                       
                     <li>
                         <label class = "form_name">都道府県（番地）</label>
-                        <input type = "text" name = "address_2" class = "form_item" pattern = "[\u4E00-\u9FFF\u3040-\u309Fー0-9０-９-\s]{0,10}" value = <?php if(isset($address_2)){
+                        <input type = "text" name = "address_2" class = "form_item" pattern = "[\u30A1-\u30F6\u4E00-\u9FFF\u3040-\u309Fー0-9０-９\s-ー]{0,10}" value = <?php if(isset($address_2)){
                                                                                                                                     echo $address_2;
                                                                                                                                 }elseif(isset($address_2_return)){
                                                                                                                                     echo $address_2_return;                                                                                                                                 
