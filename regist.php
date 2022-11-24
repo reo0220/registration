@@ -91,6 +91,9 @@ if(!empty($family_name) && !empty($last_name) && !empty($family_name_kana) && !e
         <li>
             <button onclick="location.href='regist.php'" class ="btn">アカウント登録</button>
         </li>
+        <li>
+            <button onclick="location.href='list.php'" class ="btn">アカウント一覧</button>
+        </li>
     </ul>
     <main>
         <h2>アカウント登録画面</h2>

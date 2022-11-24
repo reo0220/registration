@@ -24,6 +24,9 @@ session_destroy();
         <li>
             <button onclick="location.href='regist.php'" class ="btn">アカウント登録</button>
         </li>
+        <li>
+            <button onclick="location.href='list.php'" class ="btn">アカウント一覧</button>
+        </li>
     </ul>
     <main>
         <div class ="left">

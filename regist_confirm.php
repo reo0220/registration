@@ -32,6 +32,9 @@ $_SESSION['authority_send'] = $_POST['authority'];
             <li>
                 <button onclick="location.href='regist.php'" class ="btn">アカウント登録</button>
             </li>
+            <li>
+                <button onclick="location.href='list.php'" class ="btn">アカウント一覧</button>
+            </li>
         </ul>
         <h2>アカウント登録確認画面</h2>
         <main>

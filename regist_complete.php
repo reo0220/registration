@@ -42,6 +42,9 @@ values('".$_POST['family_name']."','".$_POST['last_name']."','".$_POST['family_n
         <li>
             <button onclick="location.href='regist.php'" class ="btn">アカウント登録</button>
         </li>
+        <li>
+            <button onclick="location.href='list.php'" class ="btn">アカウント一覧</button>
+        </li>
     </ul>
     <h2 class = "h2">アカウント登録完了画面</h2>
     <main>
