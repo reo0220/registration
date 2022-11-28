@@ -23,13 +23,11 @@ img{
 }
 
 a{
-    color:white;
+    color:black;
     text-decoration: none;
 }
 
-a:hover{
-    color: #66FFFF
-}
+
 .ul{
     width: 500px;
     margin: 0 auto;
@@ -69,6 +67,21 @@ a:hover{
 .center{
     text-align: center;
     margin-bottom: 250px;
+}
+
+.itiran{
+    text-align: center;
+    margin-top: 100px;
+}
+
+th{
+    text-align: center;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+td{
+    text-align: center;
 }
 
 

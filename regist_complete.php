@@ -55,7 +55,7 @@ values('".$_POST['family_name']."','".$_POST['last_name']."','".$_POST['family_n
                     echo $db_error;
                     echo '</font>';
                   }else{
-                      echo "登録完了しました";
+                    echo "登録完了しました";
                }?>
           </h1>
     </div>   
