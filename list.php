@@ -22,14 +22,13 @@
             </li>
         </ul>
         <h2>アカウント一覧画面</h2>
-        <main class ="itiran">
-           <div align="center">
-           <?php                                                                                                      
+        <main class = "itiran">
+         <div align="center">
+            <?php
                 mb_internal_encoding("utf8");
                 $dbh = new PDO("mysql:dbname=registration;host=localhost;","root","root");//データベース接続
-                $sql = "SELECT id,family_name,last_name,family_name_kana,last_name_kana,mail,gender,authority,delete_flag,registered_time,update_time FROM users ORDER BY id DESC";
+                $sql = "SELECT * FROM users ORDER BY id DESC";//$sqlにIDの降順でusersデーブルの値を代入
                 $stmt = $dbh->query($sql);//$stmtにIDの降順でusersデーブルの値を代入
-                
 
                 echo "<table border = '1' cellpadding='0' cellspacing='0'>";
                 echo "<tr>";
@@ -56,27 +55,27 @@
                     echo"<td>".$row['last_name_kana']."</td>";
                     echo"<td>".$row['mail']."</td>";
                     echo"<td>";
-                    if($row['gender'] === "0"){//0の場合「男」１の場合「女」
+                    if($row['gender'] === "0"){
                         echo "男";
                     }else{
                         echo "女";
                     }
                     echo "</td>";
                     echo"<td>";
-                    if($row['authority'] === "0"){//0の場合「一般」１の場合「管理者」
+                    if($row['authority'] === "0"){
                         echo "一般";
                     }else{
                         echo "管理者";
                     }
                     echo "</td>";
                     echo"<td>";
-                    if($row['delete_flag'] === "0"){//0の場合「無効」１の場合「有効」
+                    if($row['delete_flag'] === "0"){
                         echo "有効";
                     }else{
                         echo "無効";
                     }
                     echo "</td>";
-                    echo"<td>".date('Y/m/d',strtotime($row['registered_time']))."</td>";//日時の文字列 = date('日付/時刻フォーマット文字列' [,UNIXタイムスタンプ]);
+                    echo"<td>".date('Y/m/d',strtotime($row['registered_time']))."</td>";
                     echo"<td>".date('Y/m/d',strtotime($row['update_time']))."</td>";
                     echo"<td>";
                     echo "<button><a href = 'update.php?user_id=$row[id]'>更新</a></button>";//パラメータにidを渡す
@@ -88,10 +87,9 @@
 
             };
             echo "</table>";
-?>
-</div>
-
-        </main>
-        <footer>Copyright D.I.Works | D.I.blog is the one which provides A to Z about programming</footer>
-    </body>
+        ?>
+        </div>
+    </main>
+    <footer>Copyright D.I.Works | D.I.blog is the one which provides A to Z about programming</footer>
+</body>
 </html>
