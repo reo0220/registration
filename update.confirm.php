@@ -3,7 +3,7 @@
     <head>
         <meta charset = "UTF-8">
         <link rel = "stylesheet" type = "text/css" href = "style2.css">
-        <title>アカウント更新画面</title>
+        <title>アカウント更新確認画面</title>
     </head>
     <body>
         <img src ="diblog_logo.jpg">
@@ -21,7 +21,7 @@
                 <button onclick="location.href='list.php'" class ="btn">アカウント一覧</button>
             </li>
         </ul>
-        <h2>アカウント更新画面</h2>
+        <h2>アカウント更新確認画面</h2>
         <main>
 
         </main>
@@ -29,5 +29,5 @@
 
 
 
-
         </body>
+ </html>    
