@@ -71,9 +71,9 @@
                     echo "</td>";
                     echo"<td>";
                     if($row['delete_flag'] === "0"){//0の場合「無効」１の場合「有効」
-                        echo "無効";
-                    }else{
                         echo "有効";
+                    }else{
+                        echo "無効";
                     }
                     echo "</td>";
                     echo"<td>".date('Y/m/d',strtotime($row['registered_time']))."</td>";//日時の文字列 = date('日付/時刻フォーマット文字列' [,UNIXタイムスタンプ]);
