@@ -23,6 +23,9 @@
         </ul>
         <h2>アカウント削除確認画面</h2>
         <main>
+        <div align="center" class = "center2">
+            <h1>本当に削除してよろしいですか？</h1>
+        </div>
 
         </main>
         <footer>Copyright D.I.Works | D.I.blog is the one which provides A to Z about programming</footer>

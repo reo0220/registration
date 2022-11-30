@@ -29,12 +29,12 @@
                     $dbh = new PDO("mysql:dbname=registration;host=localhost;","root","root");
                     $sql = "SELECT * FROM users WHERE id = $user_id ";//パラメータに渡された[user_id]のidの情報を取り出す
                     $stmt = $dbh->query($sql);
-                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);//カラム名で添字付けた配列を返す
             ?>    
            <ul class ="ul">
-           <li>
+                <li>
                     <label class ="form_name">名前（姓）</label>
-                    <p><?php echo $result['family_name'];?></p>
+                    <p><?php echo $result['family_name'];?></p><!--$resultの配列に入ってるfamily_nameカラムの値を出力-->
                 </li>
                 <li>
                     <label class ="form_name">名前（名）</label>
@@ -55,13 +55,21 @@
                 <li>
                     <label class ="form_name">パスワード</label>
                     <p><?php
-                        for($i = 0;$i < mb_strlen($result['password']);$i++){ //文字数分●表示
-                                echo "●"; 
+                        for($i = 0;$i < mb_strlen($result['password']);$i++){ //最大文字数10文字分●表示
+                            if($i == 10){
+                                break;
+                            }else{
+                                echo "●";
+                            } 
                         };?></p>
                 </li>
                 <li>
                     <label class ="form_name">性別</label>
-                    <p><?php echo $result['gender'];?></p>
+                    <p><?php if($result['gender'] === "0"){
+                                        echo "男";
+                                }else{
+                                        echo "女";
+                                };?></p>
                 </li>
                 <li>
                     <label class ="form_name">郵便番号</label>
@@ -81,8 +89,28 @@
                 </li>
                 <li>
                     <label class ="form_name">アカウント権限</label>
-                    <p><?php echo $result['authority'];?></p>
+                    <p><?php if($result['authority'] === "0"){
+                                        echo "一般";
+                                }else{
+                                        echo "管理者";
+                                };?></p>
                 </li>
+            </ul>
+            <form align="center" method = "POST" action ="delete_confirm.php">
+            <input type = "submit" class = "botton2" value = "確認する">
+            <input type = "hidden" value = "<?php $_result['family_name'];?>" >
+            <input type = "hidden" value = "<?php $_result['last_name'];?>" >
+            <input type = "hidden" value = "<?php $_result['family_name_kana'];?>" >
+            <input type = "hidden" value = "<?php $_result['last_name_kana'];?>" >
+            <input type = "hidden" value = "<?php $_result['mail'];?>" >
+            <input type = "hidden" value = "<?php $_result['password'];?>" >
+            <input type = "hidden" value = "<?php $_result['gender'];?>" >
+            <input type = "hidden" value = "<?php $_result['postal_code'];?>" >
+            <input type = "hidden" value ="<?php $_result['prefecture'];?>" >
+            <input type = "hidden" value ="<?php $_result['address_1'];?>" >
+            <input type = "hidden" value = "<?php $_result['address_2'];?>" >
+            <input type = "hidden" value = "<?php $_result['authority'];?>" >
+        </form>    
 
         </main>
         <footer>Copyright D.I.Works | D.I.blog is the one which provides A to Z about programming</footer>
