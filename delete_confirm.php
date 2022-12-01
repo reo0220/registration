@@ -26,11 +26,15 @@
         <div align="center" class = "center2">
             <h1>本当に削除してよろしいですか？</h1>
         </div>
-
+        <?php
+           echo "<div class ='botton3'>"."<button><a href ='delete.php?user_id=$_POST[id]'>前に戻る</a></button>"."</div>";
+        ?>
+        <form method = "POST" action ="delete_complete.php">
+            <input type = "submit" class = "botton2" value = "削除する">
+            <input type = "hidden" value = "<?php echo $_POST['id'];?>" name = "id">
+        </form>
         </main>
         <footer>Copyright D.I.Works | D.I.blog is the one which provides A to Z about programming</footer>
-
-
 
 
     </body>

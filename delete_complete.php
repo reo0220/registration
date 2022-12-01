@@ -1,3 +1,21 @@
+<?php
+    $id = $_POST['id'];
+    try{
+        mb_internal_encoding("utf8");
+        $dbh = new PDO("mysql:dbname=registration;host=localhost;","root","root",
+                array(
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,//SQL実行失敗の時、例外をスロー
+                    PDO::ATTR_EMULATE_PREPARES => false,
+                    )   
+                );
+                 $sql = "UPDATE users SET delete_flag = 1 WHERE id= $id";
+                 $stmt = $dbh->query($sql);
+        }
+        catch(PDOException $e){//DB接続エラーが発生した時$db_errorを定義
+            $db_error = "エラーが発生したためアカウント削除できません。";
+            }
+             ?>  
+
 <!DOCTYPE html>
 <html lang ="ja">
     <head>
@@ -23,7 +41,19 @@
         </ul>
         <h2>アカウント削除完了画面</h2>
         <main>
-
+            <div align="center" class = "center2">
+                <h1> 
+                    <?php
+                    if(isset($db_error)){
+                        echo '<font color="red">';
+                        echo $db_error;
+                        echo '</font>';
+                    }else{
+                        echo "削除完了しました";
+                }?>
+                </h1>
+            </div>   
+            <div align ="center"><button onclick="location.href='index.php'" class ="btn" >TOPページへ戻る</button> </div>
         </main>
         <footer>Copyright D.I.Works | D.I.blog is the one which provides A to Z about programming</footer>
 

@@ -97,20 +97,9 @@
                 </li>
             </ul>
             <form align="center" method = "POST" action ="delete_confirm.php">
-            <input type = "submit" class = "botton2" value = "確認する">
-            <input type = "hidden" value = "<?php $_result['family_name'];?>" >
-            <input type = "hidden" value = "<?php $_result['last_name'];?>" >
-            <input type = "hidden" value = "<?php $_result['family_name_kana'];?>" >
-            <input type = "hidden" value = "<?php $_result['last_name_kana'];?>" >
-            <input type = "hidden" value = "<?php $_result['mail'];?>" >
-            <input type = "hidden" value = "<?php $_result['password'];?>" >
-            <input type = "hidden" value = "<?php $_result['gender'];?>" >
-            <input type = "hidden" value = "<?php $_result['postal_code'];?>" >
-            <input type = "hidden" value ="<?php $_result['prefecture'];?>" >
-            <input type = "hidden" value ="<?php $_result['address_1'];?>" >
-            <input type = "hidden" value = "<?php $_result['address_2'];?>" >
-            <input type = "hidden" value = "<?php $_result['authority'];?>" >
-        </form>    
+                <input type = "submit" class = "botton2" value = "確認する">
+                <input type = "hidden" value = "<?php echo $result['id'];?>" name ="id" >
+            </form>    
 
         </main>
         <footer>Copyright D.I.Works | D.I.blog is the one which provides A to Z about programming</footer>
