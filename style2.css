@@ -64,7 +64,15 @@ a{
     margin-right:40px;
 
 }
-
+.botton4{
+    display: flex;
+    justify-content: center;
+    margin-right: 85px;
+    margin-top: 80px;
+}
+.botton4 button{
+     margin-right: 30px;
+}
 
 .h2{
     margin-bottom: 200px;
