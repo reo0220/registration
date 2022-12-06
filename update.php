@@ -42,7 +42,7 @@ if($mail === ""){
 }
 $password = $_POST['password'];
 if($password === ""){
-    $error6 = "パスワードが未入力です。";
+    $error6 = "現在のパスワード又は変更後のパスワードを入力して下さい。";
 }
 $gender = $_POST['gender'];
 
@@ -175,15 +175,17 @@ if(!empty($family_name) && !empty($last_name) && !empty($family_name_kana) && !e
                     </li>
                     <li>
                         <label class = "form_name">パスワード</label>
-                        <input type = "text" name = "password" class = "form_item" pattern = "[0-9a-zA-Z]{0,10}" value = <?php if(isset($password)){
+                        <input type = "text" name = "password" class = "form_item" pattern = "[0-9a-zA-Z]{0,10}"  value = <?php if(isset($password)){
                                                                                                                                     echo $password;
                                                                                                                                 }elseif(isset($password_return)){
                                                                                                                                     echo $password_return;                                                                                                                                 
                                                                                                                                 }else{
-                                                                                                                                    echo $result['password'];
-                                                                                                                                }?>> <!--半角英数字10文字まで-->
+                                                                                                                                    echo "";
+                                                                                                                                }
+                                                                                                                                    
+                                                                                                                                ?>> <!--半角英数字10文字まで-->
                         <?php if(!empty($error6)):?>
-                            <p class="text-danger"><?php echo $error6 ?></p>
+                            <p class="text-danger-pass"><?php echo $error6 ?></p>
                         <?php endif; ?>
                     </li>  
                     <li>
@@ -669,7 +671,7 @@ if(!empty($family_name) && !empty($last_name) && !empty($family_name_kana) && !e
                     </li>                                       
                     <li>
                         <label class = "form_name">都道府県（番地）</label>
-                        <input type = "text" name = "address_2" class = "form_item" pattern = "[\u30A1-\u30F6\u4E00-\u9FFF\u3040-\u309Fー0-9０-９\s-ー]{0,10}" value = <?php if(isset($address_2)){
+                        <input type = "text" name = "address_2" class = "form_item" pattern = "[\u30A1-\u30F6\u4E00-\u9FFF\u3040-\u309Fー0-9０-９\s-ー]{0,100}" value = <?php if(isset($address_2)){
                                                                                                                                     echo $address_2;
                                                                                                                                 }elseif(isset($address_2_return)){
                                                                                                                                     echo $address_2_return;                                                                                                                                 
@@ -688,7 +690,7 @@ if(!empty($family_name) && !empty($last_name) && !empty($family_name_kana) && !e
                                                         }elseif(isset($authority_return)){
                                                             echo $authority_return == "一般" ? "selected" :"";                                                       
                                                         }elseif($result['authority']==="0"){
-                                                            echo "一般";
+                                                            echo "selected";
                                                         }else{
                                                             echo "";
                                                         }
@@ -698,7 +700,7 @@ if(!empty($family_name) && !empty($last_name) && !empty($family_name_kana) && !e
                                                         }elseif(isset($authority_return)){
                                                             echo $authority_return == "管理者" ? "selected" :"";                                                       
                                                         }elseif($result['authority']==="1"){
-                                                            echo "管理者";
+                                                            echo "selected";
                                                         }else{
                                                             echo "";
                                                         }?>>管理者</option>

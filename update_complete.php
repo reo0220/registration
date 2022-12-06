@@ -5,13 +5,14 @@ $last_name = $_POST['last_name'];
 $family_name_kana = $_POST['family_name_kana'];
 $last_name_kana = $_POST['last_name_kana'];
 $mail = $_POST['mail'];
-$password = password_hash($_POST['password'],PASSWORD_DEFAULT);
 $gender = $_POST['gender'];
 $prefecture = $_POST['prefecture'];
 $postal_code = $_POST['postal_code'];
 $address_1 = $_POST['address_1'];
 $address_2 = $_POST['address_2'];
 $authority = $_POST['authority'];
+
+
 
 try{
     mb_internal_encoding("utf8");
@@ -21,8 +22,20 @@ try{
                 PDO::ATTR_EMULATE_PREPARES => false,
             )   
     );
-    $sql = "UPDATE users SET family_name = '$family_name',last_name = '$last_name',family_name_kana = '$family_name_kana',last_name_kana = '$last_name_kana',mail = '$mail',password = '$password',gender = '$gender',postal_code = '$postal_code',prefecture = '$prefecture',address_1 = '$address_1',address_2 = '$address_2',authority = '$authority' WHERE id = '$id'";
-    $dbh -> exec($sql);
+    
+    $sql = "SELECT * FROM users WHERE id = $id";
+    $stmt = $dbh ->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    if(password_verify($_POST['password'], $result['password'])){
+        $password = $result['password'];
+    }else{
+        $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
+    } 
+
+    $sql1 = "UPDATE users SET family_name = '$family_name',last_name = '$last_name',family_name_kana = '$family_name_kana',last_name_kana = '$last_name_kana',mail = '$mail',password = '$password',gender = '$gender',postal_code = '$postal_code',prefecture = '$prefecture',address_1 = '$address_1',address_2 = '$address_2',authority = '$authority' WHERE id = '$id'";
+    $dbh -> exec($sql1);
  
 }
     catch(PDOException $e){//DB接続エラーが発生した時$db_errorを定義

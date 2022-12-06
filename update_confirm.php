@@ -93,7 +93,16 @@ $_SESSION['authority_send'] = $_POST['authority'];
             </li>
         </ul>   
         <div class ="botton4">
-            <button><?php echo "<a href ='update.php?user_id=$_POST[id]'>前に戻る</a>";?></button>
+        <?php
+            $id = $_POST['id'];
+            mb_internal_encoding("utf8");
+            $dbh = new PDO("mysql:dbname=registration;host=localhost;","root","root");
+            $sql = "SELECT * FROM users WHERE id = $id ";
+            $stmt = $dbh->query($sql);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        ?>
+        
+        <button><?php echo "<a href ='update.php?user_id=$_POST[id]'>前に戻る</a>";?></button>
     
         
         <form method = "POST" action ="update_complete.php">

@@ -53,6 +53,12 @@ a{
     margin-bottom: 0px;
     margin-left: 180px; 
 }
+.text-danger-pass{
+    color: red;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    margin-left: 50px;
+}
 .botton1{
     float: left;
     margin-left: 15px;
