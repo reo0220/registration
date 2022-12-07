@@ -1,73 +1,73 @@
 <?php
-session_start();
-if(isset($_SESSION['family_name_send'])):{//$_SESSION['family_name_send']に値が入っているとき
+    session_start();
+    if(isset($_SESSION['family_name_send'])):{//$_SESSION['family_name_send']に値が入っているとき
 
-$family_name_return = $_SESSION['family_name_send']; //$family_name_kana_returnにセッション変数に入っている値を代入
-$last_name_return = $_SESSION['last_name_send']; 
-$family_name_kana_return = $_SESSION['family_name_kana_send'];
-$last_name_kana_return = $_SESSION['last_name_kana_send']; 
-$mail_return = $_SESSION['mail_send']; 
-$password_return = $_SESSION['password_send']; 
-$gender_return = $_SESSION['gender_send']; 
-$postal_code_return = $_SESSION['postal_code_send']; 
-$prefecture_return = $_SESSION['prefecture_send']; 
-$address_1_return = $_SESSION['address_1_send']; 
-$address_2_return = $_SESSION['address_2_send']; 
-$authority_return = $_SESSION['authority_send'];
-} 
+    $family_name_return = $_SESSION['family_name_send']; //$family_name_kana_returnにセッション変数に入っている値を代入
+    $last_name_return = $_SESSION['last_name_send']; 
+    $family_name_kana_return = $_SESSION['family_name_kana_send'];
+    $last_name_kana_return = $_SESSION['last_name_kana_send']; 
+    $mail_return = $_SESSION['mail_send']; 
+    $password_return = $_SESSION['password_send']; 
+    $gender_return = $_SESSION['gender_send']; 
+    $postal_code_return = $_SESSION['postal_code_send']; 
+    $prefecture_return = $_SESSION['prefecture_send']; 
+    $address_1_return = $_SESSION['address_1_send']; 
+    $address_2_return = $_SESSION['address_2_send']; 
+    $authority_return = $_SESSION['authority_send'];
+    } 
 ?>
 <?php endif;?>
 <?php session_destroy();?><!--セッションの値破棄-->
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST'): {//POSTメソッドがリクエストがあったとき
-    $family_name = $_POST['family_name'];//$family_nameに入力した値を代入
-if($family_name === ""){//代入した値が空のとき
-    $error1 = "名前（姓）が未入力です。"; //$error1にエラーメッセージを代入
-}
-$last_name = $_POST['last_name'];
-if($last_name === ""){
-    $error2 = "名前(名)が未入力です。";
-}
-$family_name_kana = $_POST['family_name_kana'];
-if($family_name_kana === ""){
-    $error3 = "カナ（姓）が未入力です。";
-}
-$last_name_kana = $_POST['last_name_kana'];
-if($last_name_kana === ""){
-    $error4 = "カナ（名）が未入力です。";
-}
-$mail = $_POST['mail'];
-if($mail === ""){
-    $error5 = "メールアドレスが未入力です。";
-}
-$password = $_POST['password'];
-if($password === ""){
-    $error6 = "現在のパスワード又は変更後のパスワードを入力して下さい。";
-}
-$gender = $_POST['gender'];
-
-$postal_code = $_POST['postal_code'];
-if($postal_code === ""){
-    $error7 = "郵便番号が未入力です。";
-}
-$prefecture = $_POST['prefecture'];
-if($prefecture === ""){
-    $error8 = "住所（都道府県）が未入力です。";
-}
-$address_1 = $_POST['address_1'];
-if($address_1 === ""){
-    $error9 = "都道府県（市区町村）が未入力です。";
-}
-$address_2 = $_POST['address_2'];
-if($address_2 === ""){
-    $error10 = "都道府県（番地）が未入力です。";
-}
-$authority = $_POST['authority'];
-
-if(!empty($family_name) && !empty($last_name) && !empty($family_name_kana) && !empty($last_name_kana) && !empty($mail) && !empty($password) && !empty($postal_code) && !empty($prefecture) && !empty($address_1) && !empty($address_2)){
-    header("Location:http://localhost/registration/update_confirm.php",true,307);//入力フォームが空じゃない時、POST形式でリダイレクト
-}
+    if ($_SERVER['REQUEST_METHOD'] === 'POST'): {//POSTメソッドがリクエストがあったとき
+        $family_name = $_POST['family_name'];//$family_nameに入力した値を代入
+    if($family_name === ""){//代入した値が空のとき
+        $error1 = "名前（姓）が未入力です。"; //$error1にエラーメッセージを代入
     }
+    $last_name = $_POST['last_name'];
+    if($last_name === ""){
+        $error2 = "名前(名)が未入力です。";
+    }
+    $family_name_kana = $_POST['family_name_kana'];
+    if($family_name_kana === ""){
+        $error3 = "カナ（姓）が未入力です。";
+    }
+    $last_name_kana = $_POST['last_name_kana'];
+    if($last_name_kana === ""){
+        $error4 = "カナ（名）が未入力です。";
+    }
+    $mail = $_POST['mail'];
+    if($mail === ""){
+        $error5 = "メールアドレスが未入力です。";
+    }
+    $password = $_POST['password'];
+    if($password === ""){
+        $error6 = "現在のパスワード又は変更後のパスワードを入力して下さい。";
+    }
+    $gender = $_POST['gender'];
+
+    $postal_code = $_POST['postal_code'];
+    if($postal_code === ""){
+        $error7 = "郵便番号が未入力です。";
+    }
+    $prefecture = $_POST['prefecture'];
+    if($prefecture === ""){
+        $error8 = "住所（都道府県）が未入力です。";
+    }
+    $address_1 = $_POST['address_1'];
+    if($address_1 === ""){
+        $error9 = "都道府県（市区町村）が未入力です。";
+    }
+    $address_2 = $_POST['address_2'];
+    if($address_2 === ""){
+        $error10 = "都道府県（番地）が未入力です。";
+    }
+    $authority = $_POST['authority'];
+
+    if(!empty($family_name) && !empty($last_name) && !empty($family_name_kana) && !empty($last_name_kana) && !empty($mail) && !empty($password) && !empty($postal_code) && !empty($prefecture) && !empty($address_1) && !empty($address_2)){
+        header("Location:http://localhost/registration/update_confirm.php",true,307);//入力フォームが空じゃない時、POST形式でリダイレクト
+    }
+        }
 ?>
 <?php endif;?>
 
@@ -96,7 +96,7 @@ if(!empty($family_name) && !empty($last_name) && !empty($family_name_kana) && !e
         </ul>
         <h2>アカウント更新画面</h2>
         <main>
-        <?php
+            <?php
                     $user_id = $_GET["user_id"];
                     mb_internal_encoding("utf8");
                     $dbh = new PDO("mysql:dbname=registration;host=localhost;","root","root");
@@ -104,7 +104,7 @@ if(!empty($family_name) && !empty($last_name) && !empty($family_name_kana) && !e
                     $stmt = $dbh->query($sql);
                     $result = $stmt->fetch(PDO::FETCH_ASSOC);//カラム名で添字付けた配列を返す
             ?>    
-        <form  name = "form" action = <?php echo "update.php?user_id=$result[id]"?> method = "POST">
+            <form  name = "form" action = <?php echo "update.php?user_id=$result[id]"?> method = "POST">
                 <input type = "hidden" name = "id" value = "<?php echo $result['id'];?>">
                 <ul class = "ul">
                     <li>
@@ -709,11 +709,7 @@ if(!empty($family_name) && !empty($last_name) && !empty($family_name_kana) && !e
                     <li><input type = "submit" class = "submit" value="更新する"></li>
                 </ul>       
             </form> 
-
         </main>
         <footer>Copyright D.I.Works | D.I.blog is the one which provides A to Z about programming</footer>
-
-
-
-
-        </body>
+    </body>
+</html>
