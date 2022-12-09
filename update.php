@@ -658,7 +658,7 @@
                     </li>
                     <li>
                         <label class = "form_name">都道府県（市区町村）</label>
-                        <input type = "text" name = "address_1" class = "form_item" pattern = "[\u30A1-\u30F6\u4E00-\u9FFF\u3040-\u309Fー0-9０-９\s-ー]{0,10}" value = <?php if(isset($address_1)){
+                        <input type = "text" name = "address_1" class = "form_item" pattern = "[-\u30A1-\u30F6\u4E00-\u9FFF\u3040-\u309Fー\s0-9０-９]{0,10}" value = <?php if(isset($address_1)){
                                                                                                                                     echo $address_1;
                                                                                                                                 }elseif(isset($address_1_return)){
                                                                                                                                     echo $address_1_return;                                                                                                                                 
@@ -671,7 +671,7 @@
                     </li>                                       
                     <li>
                         <label class = "form_name">都道府県（番地）</label>
-                        <input type = "text" name = "address_2" class = "form_item" pattern = "[\u30A1-\u30F6\u4E00-\u9FFF\u3040-\u309Fー0-9０-９\s-ー]{0,100}" value = <?php if(isset($address_2)){
+                        <input type = "text" name = "address_2" class = "form_item" pattern = "[-\u30A1-\u30F6\u4E00-\u9FFF\u3040-\u309Fー\s0-9０-９]{0,100}" value = <?php if(isset($address_2)){
                                                                                                                                     echo $address_2;
                                                                                                                                 }elseif(isset($address_2_return)){
                                                                                                                                     echo $address_2_return;                                                                                                                                 

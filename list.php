@@ -84,10 +84,18 @@ session_destroy();
                     echo"<td>".date('Y/m/d',strtotime($row['registered_time']))."</td>";
                     echo"<td>".date('Y/m/d',strtotime($row['update_time']))."</td>";
                     echo"<td>";
-                    echo "<button><a href = 'update.php?user_id=$row[id]'>更新</a></button>";//パラメータにidを渡す
+                    if($row['delete_flag']==="1"){
+                        echo "<button><a href = 'list.php'>更新</a></button>";//削除フラグが有効な場合、「更新」「削除」画面へ移動できないようにする
+                    }else{
+                        echo "<button><a href = 'update.php?user_id=$row[id]'>更新</a></button>";//パラメータにidを渡す
+                    }
                     echo "</td>";
                     echo"<td>";
-                    echo "<button><a href ='delete.php?user_id=$row[id]'>削除</a></button>";
+                    if($row['delete_flag']==="1"){
+                        echo "<button><a href = 'list.php'>削除</a></button>";
+                    }else{
+                        echo "<button><a href = 'delete.php?user_id=$row[id]'>削除</a></button>";//パラメータにidを渡す
+                    }
                     echo "</td>";
                     echo "</tr>";
 
