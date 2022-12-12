@@ -33,9 +33,20 @@ a{
     margin: 0 auto;
 }
 
+
 .ul li {
     list-style: none;
     margin-bottom: 20px;
+}
+
+.ul2{
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+.ul2 li {
+    list-style: none;
+    margin-bottom: 45px;
 }
 
 .form_name {
@@ -46,6 +57,11 @@ a{
 .submit{
     display: block;
     margin: 0 auto;
+}
+.submit2{
+    display: block;
+    margin: 0 auto;
+    margin-top: 30px;
 }
 .text-danger{
     color: red;
@@ -108,7 +124,16 @@ th{
 td{
     text-align: center;
 }
-
+.login_err{
+    color :red;
+    text-align: center;
+    margin-top: 100px;
+    font-size: 20px;
+}
+.login_err2{
+    color: red;
+    margin-left: 150px;
+}
 
 footer{
     position: fixed;
