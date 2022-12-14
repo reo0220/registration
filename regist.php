@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+$login = $_SESSION['authority'];
+
 if(isset($_SESSION['family_name_send'])):{//$_SESSION['family_name_send']に値が入っているとき
 
 $family_name_return = $_SESSION['family_name_send']; //$family_name_kana_returnにセッション変数に入っている値を代入

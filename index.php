@@ -1,9 +1,20 @@
 <?php
-session_start();
+    session_start();
+    
+    if(isset($_SESSION['mail'])){
+            $mail = $_SESSION['mail'];
+            
+            mb_internal_encoding("utf8");
+            $dbh = new PDO("mysql:dbname=registration;host=localhost;","root","root");
+            $sql = "SELECT * FROM users WHERE mail = '$mail'";
+            $stmt = $dbh->query($sql);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            $_SESSION['authority'] = $result['authority'];
+    }
+
 ?>
-<?php
-session_destroy();
-?>
+
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -22,10 +33,26 @@ session_destroy();
         <li>問い合わせ</li>
         <li>その他</li>
         <li>
-            <button onclick="location.href='regist.php'" class ="btn">アカウント登録</button>
+            <?php 
+                if(isset($result['authority']) && $result['authority'] === "0"){
+                    echo "";
+                    }elseif(isset($result['authority']) && $result['authority'] === "1"){
+                    echo "<button><a href = 'regist.php'>アカウント登録</a></button>";
+                }else{
+                    echo "";
+                }
+            ?>
         </li>
         <li>
-            <button onclick="location.href='list.php'" class ="btn">アカウント一覧</button>
+            <?php 
+                if(isset($result['authority']) && $result['authority'] === "0"){
+                    echo "";
+                    }elseif(isset($result['authority']) && $result['authority'] === "1"){
+                    echo "<button><a href = 'list.php'>アカウント一覧</a></button>";
+                }else{
+                    echo "";
+                }
+            ?>
         </li>
     </ul>
     <main>

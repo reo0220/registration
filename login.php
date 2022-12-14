@@ -39,6 +39,7 @@
                 $mail = "";
                 $pas = "";
             }elseif(password_verify($pas, $result['password']) && $mail === $result['mail']){//メールアドレスとパスワードが一致した時
+                $_SESSION['mail'] = $result['mail'];
                 header("Location:http://localhost/registration/index.php",true,307);
             }
         }
