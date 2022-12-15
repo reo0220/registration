@@ -1,8 +1,13 @@
 <?php
 session_start();
 
+if(isset($_SESSION['authority'])){
 $login = $_SESSION['authority'];
 
+$param = $login;
+$param_json = json_encode($param);
+
+}
 if(isset($_SESSION['family_name_send'])):{//$_SESSION['family_name_send']に値が入っているとき
 
 $family_name_return = $_SESSION['family_name_send']; //$family_name_kana_returnにセッション変数に入っている値を代入
@@ -20,7 +25,7 @@ $authority_return = $_SESSION['authority_send'];
 } 
 ?>
 <?php endif;?>
-<?php session_destroy();?><!--セッションの値破棄-->
+<?php //session_destroy();?><!--セッションの値破棄-->
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST'): {//POSTメソッドがリクエストがあったとき
     $family_name = $_POST['family_name'];//$family_nameに入力した値を代入
@@ -80,6 +85,23 @@ if(!empty($family_name) && !empty($last_name) && !empty($family_name_kana) && !e
     <meta charset="UTF-8">
     <link rel = "stylesheet" type = "text/css" href = "style2.css">
     <title>アカウント登録画面</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+            <script>
+            var param = JSON.parse('<?php echo $param_json; ?>');
+            window.onload = function(){
+               if(param == "0"){
+                Swal.fire({
+  title: '権限がないためエラーが発生しました。'
+, html : 'ログインをしていない方は下記URLからログインして下さい。'
+, type : 'warning'
+,footer: '<a href="login.php">ログイン画面</a>'
+, grow : 'fullscreen'
+});}
+            }
+
+        </script>
+
+
     
 </head>
 <body>
@@ -92,10 +114,26 @@ if(!empty($family_name) && !empty($last_name) && !empty($family_name_kana) && !e
         <li>問い合わせ</li>
         <li>その他</li>
         <li>
-            <button onclick="location.href='regist.php'" class ="btn">アカウント登録</button>
+            <?php 
+                if(isset($login) && $login === "0"){
+                    echo "";
+                    }elseif(isset($login) && $login === "1"){
+                    echo "<button><a href = 'regist.php'>アカウント登録</a></button>";
+                }else{
+                    echo "";
+                }
+            ?>
         </li>
         <li>
-            <button onclick="location.href='list.php'" class ="btn">アカウント一覧</button>
+            <?php 
+                if(isset($login) && $login === "0"){
+                    echo "";
+                    }elseif(isset($login) && $login === "1"){
+                    echo "<button><a href = 'list.php'>アカウント一覧</a></button>";
+                }else{
+                    echo "";
+                }
+            ?>
         </li>
     </ul>
     <main>

@@ -2,7 +2,12 @@
 session_start();
 ?>
 <?php
-session_destroy();
+//session_destroy();
+?>
+
+<?php 
+$param = "aa";
+$param_json = json_encode($param);
 ?>
 <!DOCTYPE html>
 <html lang ="ja">
@@ -10,6 +15,21 @@ session_destroy();
         <meta charset = "UTF-8">
         <link rel = "stylesheet" type = "text/css" href = "style2.css">
         <title>アカウント一覧画面</title>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+            <script>
+            var param = JSON.parse('<?php echo $param_json; ?>');
+            window.onload = function(){
+               if(param == "aa"){
+                Swal.fire({
+                    title: '権限がないためエラーが発生しました。'
+, html : 'ログインをしていない方は下記URLからログインして下さい。'
+, type : 'warning'
+,footer: '<a href="login.php">ログイン画面</a>'
+, grow : 'fullscreen'
+});}
+            }
+
+        </script>
     </head>
     <body>
         <img src ="diblog_logo.jpg">
