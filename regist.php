@@ -88,21 +88,26 @@ if(!empty($family_name) && !empty($last_name) && !empty($family_name_kana) && !e
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
             <script>
             var param = JSON.parse('<?php echo $param_json; ?>');
+            
             window.onload = function(){
-               if(param == "0"){
-                Swal.fire({
-  title: '権限がないためエラーが発生しました。'
-, html : 'ログインをしていない方は下記URLからログインして下さい。'
-, type : 'warning'
-,footer: '<a href="login.php">ログイン画面</a>'
-, grow : 'fullscreen'
-});}
+                if(param == "0"){
+                    Swal.fire({
+                        title: '権限がないためエラーが発生しました。',
+                        html : 'ログインをしていない方は「ログイン」ボタンからログインして下さい。', 
+                        type : 'warning',
+                        bottons:true,
+                        grow : 'fullscreen',
+                        confirmButtonText:"ログイン",
+                        allowOutsideClick:false
+                    }).then((result) =>{
+                        if(result.value){
+                                window.location.href ="./login.php";
+                            }
+                    });
+                }   
             }
 
         </script>
-
-
-    
 </head>
 <body>
     <img src ="diblog_logo.jpg">
