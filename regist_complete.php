@@ -1,5 +1,25 @@
 <?php
 session_start();
+
+if(isset($_SESSION['authority'])){
+$login = $_SESSION['authority'];
+
+$param = $login;
+$param_json = json_encode($param);
+
+}elseif(empty($_SESSION['authority'])){
+    $login = "NULL";
+
+    $param = $login;
+    $param_json = json_encode($param);
+}
+
+if(empty($_POST['family_name'])){
+    $login2 = "NULL";
+
+    $param2 = $login2;
+    $param_json2 = json_encode($param2);
+}
 ?>
 <?php
 //session_destroy();
@@ -29,6 +49,45 @@ values('".$_POST['family_name']."','".$_POST['last_name']."','".$_POST['family_n
     <meta charset="UTF-8">
     <link rel = "stylesheet" type = "text/css" href = "style2.css">
     <title>アカウント登録完了画面</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+            <script>
+            var param = JSON.parse('<?php echo $param_json; ?>');
+            var param2 = JSON.parse('<?php echo $param_json2; ?>');
+            
+            window.onload = function(){
+                if(param == "0" ||  param == "NULL"){
+                    Swal.fire({
+                        title: '権限がないためエラーが発生しました。',
+                        html : 'ログインをしていない方は「ログイン」ボタンからログインして下さい。', 
+                        type : 'warning',
+                        bottons:true,
+                        grow : 'fullscreen',
+                        confirmButtonText:"ログイン",
+                        allowOutsideClick:false
+                    }).then((result) =>{
+                        if(result.value){
+                                window.location.href ="./login.php";
+                            }
+                    });
+                }else if(param == "1" && param2 == "NULL"){
+                    Swal.fire({
+                        title: 'エラーが発生しました。',
+                        html : '「アカウント登録画面」からアカウント情報を入力して下さい。', 
+                        type : 'warning',
+                        bottons:true,
+                        grow : 'fullscreen',
+                        confirmButtonText:"アカウント登録",
+                        allowOutsideClick:false
+                    }).then((result) =>{
+                        if(result.value){
+                                window.location.href ="./regist.php";
+                            }
+                    });
+
+                }   
+            }
+
+        </script>
 </head>
 <body>
     <img src ="diblog_logo.jpg">

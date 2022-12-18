@@ -1,5 +1,20 @@
 <?php
-session_start();//$_SESSION変数の連想配列にPOSTされた値を代入
+session_start();
+
+if(isset($_SESSION['authority'])){
+$login = $_SESSION['authority'];
+
+$param = $login;
+$param_json = json_encode($param);
+
+}elseif(empty($_SESSION['authority'])){
+    $login = "NULL";
+
+    $param = $login;
+    $param_json = json_encode($param);
+}
+
+
 $_SESSION['family_name_send'] = $_POST['family_name'];
 $_SESSION['last_name_send'] = $_POST['last_name'];
 $_SESSION['family_name_kana_send'] = $_POST['family_name_kana'];
@@ -20,6 +35,29 @@ $_SESSION['authority_send'] = $_POST['authority'];
         <meta charset = "UTF-8">
         <link rel = "stylesheet" type = "text/css" href = "style2.css">
         <title>アカウント更新確認画面</title>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+            <script>
+            var param = JSON.parse('<?php echo $param_json; ?>');
+            
+            window.onload = function(){
+                if(param == "0" ||  param == "NULL"){
+                    Swal.fire({
+                        title: '権限がないためエラーが発生しました。',
+                        html : 'ログインをしていない方は「ログイン」ボタンからログインして下さい。', 
+                        type : 'warning',
+                        bottons:true,
+                        grow : 'fullscreen',
+                        confirmButtonText:"ログイン",
+                        allowOutsideClick:false
+                    }).then((result) =>{
+                        if(result.value){
+                                window.location.href ="./login.php";
+                            }
+                    });
+                }   
+            }
+
+        </script>
     </head>
     <body>
         <img src ="diblog_logo.jpg">

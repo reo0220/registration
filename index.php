@@ -2,6 +2,7 @@
     session_start();
     
     if(isset($_SESSION['mail'])){
+
             $mail = $_SESSION['mail'];
             
             mb_internal_encoding("utf8");
@@ -11,6 +12,11 @@
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             
             $_SESSION['authority'] = $result['authority'];
+    }else{
+        $login = "NULL";
+
+        $param = $login;
+        $param_json = json_encode($param);
     }
 
 ?>
@@ -22,6 +28,29 @@
     <meta charset="UTF-8">
     <link rel = "stylesheet" type = "text/css" href = "style1.css">
     <title>diblogs</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+            <script>
+            var param = JSON.parse('<?php echo $param_json; ?>');
+            
+            window.onload = function(){
+                if(param == "NULL"){//ログインしていない状態
+                    Swal.fire({
+                        title: 'エラーが発生しました。',
+                        html : '「ログイン」ボタンからログインして下さい。', 
+                        type : 'warning',
+                        bottons:true,
+                        grow : 'fullscreen',
+                        confirmButtonText:"ログイン",
+                        allowOutsideClick:false
+                    }).then((result) =>{
+                        if(result.value){
+                                window.location.href ="./login.php";
+                            }
+                    });
+                }   
+            }
+
+        </script>
 </head>
 <body>
     <img src ="diblog_logo.jpg">
@@ -32,12 +61,12 @@
         <li>登録フォーム</li>
         <li>問い合わせ</li>
         <li>その他</li>
-        <li>
+        <li class = "index_a">
             <?php 
                 if(isset($result['authority']) && $result['authority'] === "0"){
                     echo "";
                     }elseif(isset($result['authority']) && $result['authority'] === "1"){
-                    echo "<button><a href = 'regist.php'>アカウント登録</a></button>";
+                    echo "<button><a href = 'regist.php' style='text-decoration:none; color:black;'>アカウント登録</a></button>";
                 }else{
                     echo "";
                 }
@@ -48,7 +77,7 @@
                 if(isset($result['authority']) && $result['authority'] === "0"){
                     echo "";
                     }elseif(isset($result['authority']) && $result['authority'] === "1"){
-                    echo "<button><a href = 'list.php'>アカウント一覧</a></button>";
+                    echo "<button><a class = 'index_a' href = 'list.php' style='text-decoration:none; color:black;'>アカウント一覧</a></button>";
                 }else{
                     echo "";
                 }

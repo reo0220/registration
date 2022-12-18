@@ -7,6 +7,11 @@ $login = $_SESSION['authority'];
 $param = $login;
 $param_json = json_encode($param);
 
+}elseif(empty($_SESSION['authority'])){
+    $login = "NULL";
+
+    $param = $login;
+    $param_json = json_encode($param);
 }
 if(isset($_SESSION['family_name_send'])):{//$_SESSION['family_name_send']に値が入っているとき
 
@@ -25,7 +30,9 @@ $authority_return = $_SESSION['authority_send'];
 } 
 ?>
 <?php endif;?>
-<?php //session_destroy();?><!--セッションの値破棄-->
+<?php 
+    unset($_SESSION['family_name_send']);
+?><!--セッションの値破棄-->
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST'): {//POSTメソッドがリクエストがあったとき
     $family_name = $_POST['family_name'];//$family_nameに入力した値を代入
@@ -90,7 +97,7 @@ if(!empty($family_name) && !empty($last_name) && !empty($family_name_kana) && !e
             var param = JSON.parse('<?php echo $param_json; ?>');
             
             window.onload = function(){
-                if(param == "0"){
+                if(param == "0" ||  param == "NULL"){//ログインしていない状態か「一般」権限でログインした状態
                     Swal.fire({
                         title: '権限がないためエラーが発生しました。',
                         html : 'ログインをしていない方は「ログイン」ボタンからログインして下さい。', 
@@ -119,26 +126,10 @@ if(!empty($family_name) && !empty($last_name) && !empty($family_name_kana) && !e
         <li>問い合わせ</li>
         <li>その他</li>
         <li>
-            <?php 
-                if(isset($login) && $login === "0"){
-                    echo "";
-                    }elseif(isset($login) && $login === "1"){
-                    echo "<button><a href = 'regist.php'>アカウント登録</a></button>";
-                }else{
-                    echo "";
-                }
-            ?>
+            <button onclick="location.href='regist.php'" class ="btn">アカウント登録</button>
         </li>
         <li>
-            <?php 
-                if(isset($login) && $login === "0"){
-                    echo "";
-                    }elseif(isset($login) && $login === "1"){
-                    echo "<button><a href = 'list.php'>アカウント一覧</a></button>";
-                }else{
-                    echo "";
-                }
-            ?>
+            <button onclick="location.href='list.php'" class ="btn">アカウント一覧</button>
         </li>
     </ul>
     <main>

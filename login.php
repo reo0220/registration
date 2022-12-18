@@ -1,5 +1,7 @@
 <?php
     session_start();
+    session_destroy();
+
     $err = "";
     $mail_err = "";
     $pas_err = "";

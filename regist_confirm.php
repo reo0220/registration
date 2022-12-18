@@ -1,5 +1,27 @@
 <?php
 session_start();//$_SESSION変数の連想配列にPOSTされた値を代入
+
+
+if(isset($_SESSION['authority'])){//ログインしている状態
+$login = $_SESSION['authority'];
+
+$param = $login;
+$param_json = json_encode($param);
+
+}elseif(empty($_SESSION['authority'])){//ログインしていない状態
+    $login = "NULL";
+
+    $param = $login;
+    $param_json = json_encode($param);
+}
+
+if(empty($_POST['family_name'])){//ログインしていて「アカウント登録画面」で入力していない状態
+    $login2 = "NULL";
+
+    $param2 = $login2;
+    $param_json2 = json_encode($param2);
+}
+
 $_SESSION['family_name_send'] = $_POST['family_name'];
 $_SESSION['last_name_send'] = $_POST['last_name'];
 $_SESSION['family_name_kana_send'] = $_POST['family_name_kana'];
@@ -12,6 +34,8 @@ $_SESSION['prefecture_send'] = $_POST['prefecture'];
 $_SESSION['address_1_send'] = $_POST['address_1'];
 $_SESSION['address_2_send'] = $_POST['address_2'];
 $_SESSION['authority_send'] = $_POST['authority'];
+
+
 ?>
 <!DOCTYPE html>
 <html lang ="ja">
@@ -19,6 +43,45 @@ $_SESSION['authority_send'] = $_POST['authority'];
         <meta charset = "UTF-8">
         <link rel = "stylesheet" type = "text/css" href = "style2.css">
         <title>アカウント登録確認画面</title>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+            <script>
+            var param = JSON.parse('<?php echo $param_json; ?>');
+            var param2 = JSON.parse('<?php echo $param_json2; ?>');
+            
+            window.onload = function(){
+                if(param == "0" ||  param == "NULL"){
+                    Swal.fire({
+                        title: '権限がないためエラーが発生しました。',
+                        html : 'ログインをしていない方は「ログイン」ボタンからログインして下さい。', 
+                        type : 'warning',
+                        bottons:true,
+                        grow : 'fullscreen',
+                        confirmButtonText:"ログイン",
+                        allowOutsideClick:false
+                    }).then((result) =>{
+                        if(result.value){
+                                window.location.href ="./login.php";
+                            }
+                    });
+                }else if(param == "1" && param2 == "NULL"){
+                    Swal.fire({
+                        title: 'エラーが発生しました。',
+                        html : '「アカウント登録画面」からアカウント情報を入力して下さい。', 
+                        type : 'warning',
+                        bottons:true,
+                        grow : 'fullscreen',
+                        confirmButtonText:"アカウント登録",
+                        allowOutsideClick:false
+                    }).then((result) =>{
+                        if(result.value){
+                                window.location.href ="./regist.php";
+                            }
+                    });
+
+                }
+            }
+
+        </script>
     </head>
     <body>
         <img src ="diblog_logo.jpg">

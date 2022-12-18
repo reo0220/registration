@@ -1,12 +1,19 @@
 <?php
 session_start();
 
+var_dump($_SESSION['authority']);
 if(isset($_SESSION['authority'])){
+    
     $login = $_SESSION['authority'];
     
     $param = $login;
     $param_json = json_encode($param);
     
+    }elseif(empty($_SESSION['authority'])){
+        $login = "NULL";
+
+        $param = $login;
+        $param_json = json_encode($param);
     }
 
 ?>
@@ -25,7 +32,7 @@ if(isset($_SESSION['authority'])){
             var param = JSON.parse('<?php echo $param_json; ?>');
             
             window.onload = function(){
-                if(param == "0"){
+                if(param == "0"  ||  param == "NULL"){
                     Swal.fire({
                         title: '権限がないためエラーが発生しました。',
                         html : 'ログインをしていない方は「ログイン」ボタンからログインして下さい。', 
