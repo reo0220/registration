@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-var_dump($_SESSION['authority']);
 if(isset($_SESSION['authority'])){
     
     $login = $_SESSION['authority'];
@@ -16,9 +15,9 @@ if(isset($_SESSION['authority'])){
         $param_json = json_encode($param);
     }
 
-?>
-<?php
-//session_destroy();
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -29,6 +28,16 @@ if(isset($_SESSION['authority'])){
         <title>アカウント一覧画面</title>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
             <script>
+                var remove = 0;
+
+function radioDeselection(already, numeric) {
+  if(remove == numeric) {
+    already.checked = false;
+    remove = 0;
+  } else {
+    remove = numeric;
+  }
+}
             var param = JSON.parse('<?php echo $param_json; ?>');
             
             window.onload = function(){
@@ -69,11 +78,81 @@ if(isset($_SESSION['authority'])){
         <h2>アカウント一覧画面</h2>
         <main class = "itiran">
          <div align="center">
+            <form action = "list.php" method = "POST">
+                <label>名前(姓)</label>
+                <input type = "text" name = "family_name">
+
+                <label>名前(名)</label>
+                <input type = "text" name = "last_name">
+
+                <label>カナ（姓）</label>
+                <input type = "text" name = "family_name_kana">
+
+                <label>カナ（名）</label>
+                <input type = "text" name = "last_name_kana">
+
+                <label>メールアドレス</label>
+                <input type = "text" name = "mail">
+
+                <label>性別</label>
+                <input type = "radio" name = "gender" value = "男" onclick="radioDeselection(this, 1)">男
+                <input type = "radio" name = "gender" value = "女"onclick="radioDeselection(this, 2)">女
+                <input type = "radio" name = "gender" value = "" checked = "checked" style = "display:none;" onclick="radioDeselection(this, 3)"/>
+
+                <label>アカウント権限</label>
+                <select name = "authority">
+                    <option value = ""></option>
+                    <option value = "一般">一般</option>
+                    <option value = "管理者">管理者</option>
+                </select>
+                
+                <input type = "submit" value = "検索">
+            </form>      
+            
+            
             <?php
-                mb_internal_encoding("utf8");
+                if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                    var_dump($_POST['gender']);
+                    //検索されたデータを変数に格納
+                    $family_name = $_POST['family_name'];
+                    $last_name = $_POST['last_name'];
+                    $family_name_kana = $_POST['family_name_kana'];
+                    $last_name_kana = $_POST['last_name_kana'];
+                    $mail = $_POST['mail'];
+                    
+                    if($_POST['gender'] === "男"){
+                        $gender = "0";
+                    }elseif($_POST['gender'] === "女"){
+                        $gender = "1";
+                    }else{
+                        $gender = "";
+                    }
+
+                    if($_POST['authority'] === "一般"){
+                        $authority = "0";
+                    }elseif($_POST['authority'] === "管理者"){
+                        $authority = "1";
+                    }else{
+                        $authority = "";
+                    }
+                var_dump($gender);
+                    mb_internal_encoding("utf8");
+                    $dbh = new PDO("mysql:dbname=registration;host=localhost;","root","root");
+                    
+                    if(empty($family_name) && empty($last_name) && empty($family_name_kana) && empty($last_name_kana) && empty($mail) && $gender === "" && $authority === ""){
+                        $sql = "SELECT * FROM users ORDER BY id DESC";
+                    }
+                    $stmt = $dbh->query($sql);
+
+               
+               
+               
+               
+               
+                /*mb_internal_encoding("utf8");
                 $dbh = new PDO("mysql:dbname=registration;host=localhost;","root","root");//データベース接続
                 $sql = "SELECT * FROM users ORDER BY id DESC";//$sqlにIDの降順でusersデーブルの値を代入
-                $stmt = $dbh->query($sql);//$stmtにIDの降順でusersデーブルの値を代入
+                $stmt = $dbh->query($sql);//$stmtにIDの降順でusersデーブルの値を代入*/
 
                 echo "<table border = '1' cellpadding='0' cellspacing='0'>";
                 echo "<tr>";
@@ -138,8 +217,9 @@ if(isset($_SESSION['authority'])){
                     echo "</td>";
                     echo "</tr>";
 
-            };
+            }
             echo "</table>";
+        }
         ?>
         </div>
     </main>
