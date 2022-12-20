@@ -97,7 +97,6 @@ function radioDeselection(already, numeric) {
                 <label>性別</label>
                 <input type = "radio" name = "gender" value = "男" onclick="radioDeselection(this, 1)">男
                 <input type = "radio" name = "gender" value = "女"onclick="radioDeselection(this, 2)">女
-                <input type = "radio" name = "gender" value = "" checked = "checked" style = "display:none;" onclick="radioDeselection(this, 3)"/>
 
                 <label>アカウント権限</label>
                 <select name = "authority">
@@ -112,7 +111,7 @@ function radioDeselection(already, numeric) {
             
             <?php
                 if($_SERVER['REQUEST_METHOD'] === 'POST'){
-                    var_dump($_POST['gender']);
+                
                     //検索されたデータを変数に格納
                     $family_name = $_POST['family_name'];
                     $last_name = $_POST['last_name'];
@@ -120,12 +119,12 @@ function radioDeselection(already, numeric) {
                     $last_name_kana = $_POST['last_name_kana'];
                     $mail = $_POST['mail'];
                     
-                    if($_POST['gender'] === "男"){
+                    if(empty($_POST['gender'])){//性別が何も選択していない時
+                        $gender = "NULL";
+                    }elseif($_POST['gender'] === "男"){
                         $gender = "0";
                     }elseif($_POST['gender'] === "女"){
                         $gender = "1";
-                    }else{
-                        $gender = "";
                     }
 
                     if($_POST['authority'] === "一般"){
@@ -135,16 +134,24 @@ function radioDeselection(already, numeric) {
                     }else{
                         $authority = "";
                     }
-                var_dump($gender);
+               
                     mb_internal_encoding("utf8");
                     $dbh = new PDO("mysql:dbname=registration;host=localhost;","root","root");
                     
-                    if(empty($family_name) && empty($last_name) && empty($family_name_kana) && empty($last_name_kana) && empty($mail) && $gender === "" && $authority === ""){
+                    //全ての項目が空欄の時全てのデータをセレクト
+                    if(empty($family_name) && empty($last_name) && empty($family_name_kana) && empty($last_name_kana) && empty($mail) && $gender === "NULL" && $authority === ""){
                         $sql = "SELECT * FROM users ORDER BY id DESC";
+                    //一つでも入力している項目がある場合、該当のデータを表示    
+                    }elseif(isset($family_name) || isset($last_name) || isset($family_name_kana) || isset($last_name_kana) || isset($mail) && empty($gender) && empty($authority)){
+                        
+                        $sql = "SELECT * FROM users WHERE family_name like '%".$family_name."%' && last_name like '%".$last_name."%' && family_name_kana like '%".$family_name_kana."%' && last_name_kana like '%".$last_name_kana."%' && mail like '%".$mail."%'" ;
                     }
+
+
                     $stmt = $dbh->query($sql);
 
-               
+                    //gender = '$gender' && authority = '$authority'" ;
+                
                
                
                
