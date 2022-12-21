@@ -78,36 +78,44 @@ function radioDeselection(already, numeric) {
         <h2>アカウント一覧画面</h2>
         <main class = "itiran">
          <div align="center">
-            <form action = "list.php" method = "POST">
-                <label>名前(姓)</label>
-                <input type = "text" name = "family_name">
-
-                <label>名前(名)</label>
-                <input type = "text" name = "last_name">
-
-                <label>カナ（姓）</label>
-                <input type = "text" name = "family_name_kana">
-
-                <label>カナ（名）</label>
-                <input type = "text" name = "last_name_kana">
-
-                <label>メールアドレス</label>
-                <input type = "text" name = "mail">
-
-                <label>性別</label>
-                <input type = "radio" name = "gender" value = "男" onclick="radioDeselection(this, 1)">男
-                <input type = "radio" name = "gender" value = "女"onclick="radioDeselection(this, 2)">女
-
-                <label>アカウント権限</label>
-                <select name = "authority">
-                    <option value = ""></option>
-                    <option value = "一般">一般</option>
-                    <option value = "管理者">管理者</option>
-                </select>
-                
+                <form action = "list.php" method = "POST">
+                    <table border = '1' cellpadding='0' cellspacing='0'>
+                    <tr>
+                        <td><label>名前(姓)</label></td>
+                        <td><input type = "text" name = "family_name"></td>
+                        <td><label>名前(名)</label></td>
+                        <td><input type = "text" name = "last_name"></td>
+                    </tr> 
+                    <tr>
+                        <td><label>カナ（姓）</label></td>
+                        <td><input type = "text" name = "family_name_kana"></td>
+                        <td><label>カナ（名）</label></td>
+                        <td><input type = "text" name = "last_name_kana"></td>
+                    </tr>   
+                    <tr>
+                        <td><label>メールアドレス</label></td>
+                        <td><input type = "text" name = "mail"></td>
+                        <td><label>性別</label></td>
+                        <td>
+                            <input type = "radio" name = "gender" value = "男" onclick="radioDeselection(this, 1)">男
+                            <input type = "radio" name = "gender" value = "女"onclick="radioDeselection(this, 2)">女
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>アカウント権限</label></td>
+                        <td>
+                            <select name = "authority">
+                                <option value = ""></option>
+                                <option value = "一般">一般</option>
+                                <option value = "管理者">管理者</option>
+                            </select>
+                        </td>  
+                        <td colspan='2'></td>
+                    </tr>
+                </table>
                 <input type = "submit" value = "検索">
             </form>      
-            
+        
             
             <?php
                 if($_SERVER['REQUEST_METHOD'] === 'POST'){
@@ -132,51 +140,51 @@ function radioDeselection(already, numeric) {
                     }elseif($_POST['authority'] === "管理者"){
                         $authority = "1";
                     }else{
-                        $authority = "";
+                        $authority = "NULL";
                     }
                
                     mb_internal_encoding("utf8");
                     $dbh = new PDO("mysql:dbname=registration;host=localhost;","root","root");
                     
                     //全ての項目が空欄の時全てのデータをセレクト
-                    if(empty($family_name) && empty($last_name) && empty($family_name_kana) && empty($last_name_kana) && empty($mail) && $gender === "NULL" && $authority === ""){
+                    if(empty($family_name) && empty($last_name) && empty($family_name_kana) && empty($last_name_kana) && empty($mail) && $gender === "NULL" && $authority === "NULL"){
                         $sql = "SELECT * FROM users ORDER BY id DESC";
-                    //一つでも入力している項目がある場合、該当のデータを表示    
-                    }elseif(isset($family_name) || isset($last_name) || isset($family_name_kana) || isset($last_name_kana) || isset($mail) && empty($gender) && empty($authority)){
-                        
-                        $sql = "SELECT * FROM users WHERE family_name like '%".$family_name."%' && last_name like '%".$last_name."%' && family_name_kana like '%".$family_name_kana."%' && last_name_kana like '%".$last_name_kana."%' && mail like '%".$mail."%'" ;
+                    //性別と権限が選択されていないかつ、他の項目が一つでも入力されているとき  
+                    }elseif((isset($family_name) || isset($last_name) || isset($family_name_kana) || isset($last_name_kana) || isset($mail)) && ($gender === "NULL" && $authority === "NULL")){
+                        $sql = "SELECT * FROM users WHERE family_name like '%".$family_name."%' && last_name like '%".$last_name."%' && family_name_kana like '%".$family_name_kana."%' && last_name_kana like '%".$last_name_kana."%' && mail like '%".$mail."%' ORDER BY id DESC" ;
+                    //権限が選択されていなかつ、他の項目が一つでも入力されているとき
+                    }elseif((isset($family_name) || isset($last_name) || isset($family_name_kana) || isset($last_name_kana) || isset($mail) || $gender != "NULL") && ($authority === "NULL")){
+                        $sql = "SELECT * FROM users WHERE family_name like '%".$family_name."%' && last_name like '%".$last_name."%' && family_name_kana like '%".$family_name_kana."%' && last_name_kana like '%".$last_name_kana."%' && mail like '%".$mail."%' && gender = '$gender' ORDER BY id DESC" ;     
+                    //性別が選択されていなかつ、他の項目が一つでも入力されているとき
+                    }elseif((isset($family_name) || isset($last_name) || isset($family_name_kana) || isset($last_name_kana) || isset($mail) || $authority != "NULL") && ($gender === "NULL")){
+                        $sql = "SELECT * FROM users WHERE family_name like '%".$family_name."%' && last_name like '%".$last_name."%' && family_name_kana like '%".$family_name_kana."%' && last_name_kana like '%".$last_name_kana."%' && mail like '%".$mail."%' && authority = '$authority' ORDER BY id DESC" ;
+                    //性別と権限両方が選択されているかつ他の項目が一つでも入力されているとき
+                    }else{
+                        $sql = "SELECT * FROM users WHERE family_name like '%".$family_name."%' && last_name like '%".$last_name."%' && family_name_kana like '%".$family_name_kana."%' && last_name_kana like '%".$last_name_kana."%' && mail like '%".$mail."%' && gender = '$gender' && authority = '$authority' ORDER BY id DESC" ;
                     }
-
-
+                    
                     $stmt = $dbh->query($sql);
 
-                    //gender = '$gender' && authority = '$authority'" ;
-                
-               
-               
-               
-               
-                /*mb_internal_encoding("utf8");
-                $dbh = new PDO("mysql:dbname=registration;host=localhost;","root","root");//データベース接続
-                $sql = "SELECT * FROM users ORDER BY id DESC";//$sqlにIDの降順でusersデーブルの値を代入
-                $stmt = $dbh->query($sql);//$stmtにIDの降順でusersデーブルの値を代入*/
-
-                echo "<table border = '1' cellpadding='0' cellspacing='0'>";
-                echo "<tr>";
-                echo "<th>ID</th>";
-                echo "<th>名前(姓)</th>";
-                echo "<th>名前(名)</th>";
-                echo "<th>カナ(姓)</th>";
-                echo "<th>カナ(名)</th>";
-                echo "<th>メールアドレス</th>";
-                echo "<th>性別</th>";
-                echo "<th>アカウント権限</th>";
-                echo "<th>削除フラグ</th>";
-                echo "<th>登録日時</th>";
-                echo "<th>更新日時</th>";
-                echo "<th colspan='2'>操作</th>";
-                echo "</tr>";
-                
+                    //検索結果がない場合、検索結果なしと表示
+                    if($stmt->fetch() === false){
+                        echo "検索結果なし";
+                    }else{
+                    echo "<table border = '1' cellpadding='0' cellspacing='0'>";
+                    echo "<tr>";
+                    echo "<th>ID</th>";
+                    echo "<th>名前(姓)</th>";
+                    echo "<th>名前(名)</th>";
+                    echo "<th>カナ(姓)</th>";
+                    echo "<th>カナ(名)</th>";
+                    echo "<th>メールアドレス</th>";
+                    echo "<th>性別</th>";
+                    echo "<th>アカウント権限</th>";
+                    echo "<th>削除フラグ</th>";
+                    echo "<th>登録日時</th>";
+                    echo "<th>更新日時</th>";
+                    echo "<th colspan='2'>操作</th>";
+                    echo "</tr>";
+                    }
                 foreach($stmt as $row){//ループ処理
                     echo "<tr>";
                     echo"<td>".$row['id']."</td>";
