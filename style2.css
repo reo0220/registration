@@ -117,7 +117,6 @@ a{
 
 .itiran{
     text-align: center;
-    margin-top: 100px;
 }
 
 th{
@@ -138,6 +137,26 @@ td{
 .login_err2{
     color: red;
     margin-left: 150px;
+}
+
+.list_form{
+    margin-bottom: 50px;
+}
+
+.list_input{
+    height: 26px;
+    width: 301px;
+    border: none;
+}
+.list_pull{
+    height: 26px;
+    width: 301px;
+    border: none;
+}
+.kennsaku_botton{
+    margin-left: 850px;
+    width: 150px;;
+
 }
 
 footer{

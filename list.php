@@ -78,23 +78,23 @@ function radioDeselection(already, numeric) {
         <h2>アカウント一覧画面</h2>
         <main class = "itiran">
          <div align="center">
-                <form action = "list.php" method = "POST">
-                    <table border = '1' cellpadding='0' cellspacing='0'>
+                <form class = "list_form" action = "list.php" method = "POST">
+                    <table border = '1' cellpadding='0' cellspacing='0' width = "1000px">
                     <tr>
                         <td><label>名前(姓)</label></td>
-                        <td><input type = "text" name = "family_name"></td>
+                        <td><input class = "list_input"type = "text" name = "family_name" pattern="[\u4E00-\u9FFF\u3040-\u309Fー]{0,10}"></td>
                         <td><label>名前(名)</label></td>
-                        <td><input type = "text" name = "last_name"></td>
+                        <td><input class = "list_input" type = "text" name = "last_name" pattern="[\u4E00-\u9FFF\u3040-\u309Fー]{0,10}"></td>
                     </tr> 
                     <tr>
                         <td><label>カナ（姓）</label></td>
-                        <td><input type = "text" name = "family_name_kana"></td>
+                        <td><input class = "list_input" type = "text" name = "family_name_kana" pattern="[\u30A1-\u30F6]{0,10}"></td>
                         <td><label>カナ（名）</label></td>
-                        <td><input type = "text" name = "last_name_kana"></td>
+                        <td><input class = "list_input" type = "text" name = "last_name_kana" pattern="[\u30A1-\u30F6]{0,10}"></td>
                     </tr>   
                     <tr>
                         <td><label>メールアドレス</label></td>
-                        <td><input type = "text" name = "mail"></td>
+                        <td><input class = "list_input" type = "text" name = "mail" maxlength = "100"></td>
                         <td><label>性別</label></td>
                         <td>
                             <input type = "radio" name = "gender" value = "男" onclick="radioDeselection(this, 1)">男
@@ -104,16 +104,16 @@ function radioDeselection(already, numeric) {
                     <tr>
                         <td><label>アカウント権限</label></td>
                         <td>
-                            <select name = "authority">
+                            <select class = "list_pull"name = "authority">
                                 <option value = ""></option>
                                 <option value = "一般">一般</option>
                                 <option value = "管理者">管理者</option>
-                            </select>
+                            </select> 
                         </td>  
                         <td colspan='2'></td>
                     </tr>
                 </table>
-                <input type = "submit" value = "検索">
+                <input class = "kennsaku_botton" type = "submit" value = "検索">
             </form>      
         
             
@@ -122,10 +122,15 @@ function radioDeselection(already, numeric) {
                 
                     //検索されたデータを変数に格納
                     $family_name = $_POST['family_name'];
+                    $family_name2 = '%'.$_POST['family_name'].'%';
                     $last_name = $_POST['last_name'];
+                    $last_name2 = '%'.$_POST['last_name'].'%';
                     $family_name_kana = $_POST['family_name_kana'];
+                    $family_name_kana2 = '%'.$_POST['family_name_kana'].'%';
                     $last_name_kana = $_POST['last_name_kana'];
+                    $last_name_kana2 = '%'.$_POST['last_name_kana'].'%';
                     $mail = $_POST['mail'];
+                    $mail2 = '%'.$_POST['mail'].'%';
                     
                     if(empty($_POST['gender'])){//性別が何も選択していない時
                         $gender = "NULL";
@@ -149,9 +154,17 @@ function radioDeselection(already, numeric) {
                     //全ての項目が空欄の時全てのデータをセレクト
                     if(empty($family_name) && empty($last_name) && empty($family_name_kana) && empty($last_name_kana) && empty($mail) && $gender === "NULL" && $authority === "NULL"){
                         $sql = "SELECT * FROM users ORDER BY id DESC";
+                        $stmt = $dbh->query($sql);
                     //性別と権限が選択されていないかつ、他の項目が一つでも入力されているとき  
                     }elseif((isset($family_name) || isset($last_name) || isset($family_name_kana) || isset($last_name_kana) || isset($mail)) && ($gender === "NULL" && $authority === "NULL")){
-                        $sql = "SELECT * FROM users WHERE family_name like '%".$family_name."%' && last_name like '%".$last_name."%' && family_name_kana like '%".$family_name_kana."%' && last_name_kana like '%".$last_name_kana."%' && mail like '%".$mail."%' ORDER BY id DESC" ;
+                        $sql = "SELECT * FROM users WHERE family_name like :family_name && last_name like :last_name && family_name_kana like :family_name_kana && last_name_kana like :last_name_kana && mail like :mail ORDER BY id DESC" ;
+                        $stmt = $dbh->prepare($sql);
+		                $stmt->bindParam(':family_name', $family_name2,);
+                        $stmt->bindParam(':last_name', $last_name2,);
+                        $stmt->bindParam(':family_name_kana', $family_name_kana2,);
+                        $stmt->bindParam(':last_name_kana', $last_name_kana2,);
+                        $stmt->bindParam(':mail', $mail2,);
+		                $stmt->execute();
                     //権限が選択されていなかつ、他の項目が一つでも入力されているとき
                     }elseif((isset($family_name) || isset($last_name) || isset($family_name_kana) || isset($last_name_kana) || isset($mail) || $gender != "NULL") && ($authority === "NULL")){
                         $sql = "SELECT * FROM users WHERE family_name like '%".$family_name."%' && last_name like '%".$last_name."%' && family_name_kana like '%".$family_name_kana."%' && last_name_kana like '%".$last_name_kana."%' && mail like '%".$mail."%' && gender = '$gender' ORDER BY id DESC" ;     
@@ -163,11 +176,11 @@ function radioDeselection(already, numeric) {
                         $sql = "SELECT * FROM users WHERE family_name like '%".$family_name."%' && last_name like '%".$last_name."%' && family_name_kana like '%".$family_name_kana."%' && last_name_kana like '%".$last_name_kana."%' && mail like '%".$mail."%' && gender = '$gender' && authority = '$authority' ORDER BY id DESC" ;
                     }
                     
-                    $stmt = $dbh->query($sql);
+                    //$stmt = $dbh->query($sql);
 
-                    //検索結果がない場合、検索結果なしと表示
+                    //検索結果がない場合、該当するユーザーが存在しません。sと表示
                     if($stmt->fetch() === false){
-                        echo "検索結果なし";
+                        echo "<h2>該当するユーザーが存在しません。</h2>";
                     }else{
                     echo "<table border = '1' cellpadding='0' cellspacing='0'>";
                     echo "<tr>";
