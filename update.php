@@ -13,6 +13,13 @@ $param_json = json_encode($param);
     $param = $login;
     $param_json = json_encode($param);
 }
+
+if(empty($_GET["user_id"])){//ログインしていて「アカウント一覧画面」から遷移していない状態
+    $login2 = "NULL";
+
+    $param2 = $login2;
+    $param_json2 = json_encode($param2);
+}
     if(isset($_SESSION['family_name_send'])):{//$_SESSION['family_name_send']に値が入っているとき
 
     $family_name_return = $_SESSION['family_name_send']; //$family_name_kana_returnにセッション変数に入っている値を代入
@@ -93,6 +100,7 @@ $param_json = json_encode($param);
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
             <script>
             var param = JSON.parse('<?php echo $param_json; ?>');
+            var param2 = JSON.parse('<?php echo $param_json2; ?>');
             
             window.onload = function(){
                 if(param == "0" ||  param == "NULL"){
@@ -109,7 +117,22 @@ $param_json = json_encode($param);
                                 window.location.href ="./login.php";
                             }
                     });
-                }   
+                }else if(param == "1" && param2 == "NULL"){
+                    Swal.fire({
+                        title: 'エラーが発生しました。',
+                        html : '「アカウント一覧画面」から更新するアカウントを選択して下さい。', 
+                        type : 'warning',
+                        bottons:true,
+                        grow : 'fullscreen',
+                        confirmButtonText:"アカウント一覧",
+                        allowOutsideClick:false
+                    }).then((result) =>{
+                        if(result.value){
+                                window.location.href ="./list.php";
+                            }
+                    });
+
+                }  
             }
 
         </script>
@@ -211,7 +234,7 @@ $param_json = json_encode($param);
                     </li>
                     <li>
                         <label class = "form_name">パスワード</label>
-                        <input type = "text" name = "password" class = "form_item" pattern = "[0-9a-zA-Z]{0,10}"  value = <?php if(isset($password)){
+                        <input type = "password" name = "password" class = "form_item" pattern = "[0-9a-zA-Z]{0,10}"  value = <?php if(isset($password)){
                                                                                                                                     echo $password;
                                                                                                                                 }elseif(isset($password_return)){
                                                                                                                                     echo $password_return;                                                                                                                                 

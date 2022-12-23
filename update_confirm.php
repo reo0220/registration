@@ -14,6 +14,12 @@ $param_json = json_encode($param);
     $param_json = json_encode($param);
 }
 
+if(empty($_POST['family_name'])){//ログインしていて「アカウント更新画面」から遷移していない状態
+    $login2 = "NULL";
+
+    $param2 = $login2;
+    $param_json2 = json_encode($param2);
+}
 
 $_SESSION['family_name_send'] = $_POST['family_name'];
 $_SESSION['last_name_send'] = $_POST['last_name'];
@@ -38,6 +44,7 @@ $_SESSION['authority_send'] = $_POST['authority'];
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
             <script>
             var param = JSON.parse('<?php echo $param_json; ?>');
+            var param2 = JSON.parse('<?php echo $param_json2; ?>');
             
             window.onload = function(){
                 if(param == "0" ||  param == "NULL"){
@@ -54,6 +61,21 @@ $_SESSION['authority_send'] = $_POST['authority'];
                                 window.location.href ="./login.php";
                             }
                     });
+                }else if(param == "1" && param2 == "NULL"){
+                    Swal.fire({
+                        title: 'エラーが発生しました。',
+                        html : '「アカウント一覧画面」から更新するアカウントを選択して下さい。', 
+                        type : 'warning',
+                        bottons:true,
+                        grow : 'fullscreen',
+                        confirmButtonText:"アカウント一覧",
+                        allowOutsideClick:false
+                    }).then((result) =>{
+                        if(result.value){
+                                window.location.href ="./list.php";
+                            }
+                    });
+
                 }   
             }
 

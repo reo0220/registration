@@ -194,7 +194,7 @@ if(!empty($family_name) && !empty($last_name) && !empty($family_name_kana) && !e
                     </li>
                     <li>
                         <label class = "form_name">パスワード</label>
-                        <input type = "text" name = "password" class = "form_item" pattern = "[0-9a-zA-Z]{0,10}" value = <?php if(isset($password)){
+                        <input type = "password" name = "password" class = "form_item" pattern = "[0-9a-zA-Z]{0,10}" value = <?php if(isset($password)){
                                                                                                                                     echo $password;
                                                                                                                                 }elseif(isset($password_return)){
                                                                                                                                     echo $password_return;                                                                                                                                 

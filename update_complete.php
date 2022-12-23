@@ -13,6 +13,12 @@ $param_json = json_encode($param);
     $param = $login;
     $param_json = json_encode($param);
 }
+if(empty($_POST['family_name'])){//ログインしていて「アカウント更新確認画面」から遷移していない状態
+    $login2 = "NULL";
+
+    $param2 = $login2;
+    $param_json2 = json_encode($param2);
+}
 
 $id = $_POST['id'];
 $family_name = $_POST['family_name'];
@@ -67,6 +73,7 @@ try{
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
             <script>
             var param = JSON.parse('<?php echo $param_json; ?>');
+            var param2 = JSON.parse('<?php echo $param_json2; ?>');
             
             window.onload = function(){
                 if(param == "0" ||  param == "NULL"){
@@ -83,7 +90,22 @@ try{
                                 window.location.href ="./login.php";
                             }
                     });
-                }   
+                }else if(param == "1" && param2 == "NULL"){
+                    Swal.fire({
+                        title: 'エラーが発生しました。',
+                        html : '「アカウント一覧画面」から更新するアカウントを選択して下さい。', 
+                        type : 'warning',
+                        bottons:true,
+                        grow : 'fullscreen',
+                        confirmButtonText:"アカウント一覧",
+                        allowOutsideClick:false
+                    }).then((result) =>{
+                        if(result.value){
+                                window.location.href ="./list.php";
+                            }
+                    });
+
+                }      
             }
 
         </script>
