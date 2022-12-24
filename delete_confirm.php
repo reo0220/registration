@@ -13,6 +13,13 @@ $param_json = json_encode($param);
     $param = $login;
     $param_json = json_encode($param);
 }
+
+if(empty($_POST['id'])){//ログインしていて「アカウント削除画面」から遷移していない状態
+    $login2 = "NULL";
+
+    $param2 = $login2;
+    $param_json2 = json_encode($param2);
+}
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +31,7 @@ $param_json = json_encode($param);
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
             <script>
             var param = JSON.parse('<?php echo $param_json; ?>');
+            var param2 = JSON.parse('<?php echo $param_json2; ?>');
             
             window.onload = function(){
                 if(param == "0" ||  param == "NULL"){
@@ -40,7 +48,22 @@ $param_json = json_encode($param);
                                 window.location.href ="./login.php";
                             }
                     });
-                }   
+                }else if(param == "1" && param2 == "NULL"){//「管理者権限」でログインしているけど、アカウント削除画面から遷移していない時
+                    Swal.fire({
+                        title: 'エラーが発生しました。',
+                        html : '「アカウント一覧画面」から削除するアカウントを選択して下さい。', 
+                        type : 'warning',
+                        bottons:true,
+                        grow : 'fullscreen',
+                        confirmButtonText:"アカウント一覧",
+                        allowOutsideClick:false
+                    }).then((result) =>{
+                        if(result.value){
+                                window.location.href ="./list.php";
+                            }
+                    });
+
+                }        
             }
 
         </script>

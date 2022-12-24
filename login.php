@@ -1,6 +1,7 @@
 <?php
     session_start();
     unset($_SESSION['authority']);
+    unset($_SESSION['mail']);
 
     $err = "";
     $mail_err = "";

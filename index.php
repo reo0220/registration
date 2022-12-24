@@ -1,5 +1,6 @@
 <?php
     session_start();
+    unset($_SESSION['family_name_send']);
     
     if(isset($_SESSION['mail'])){
 
@@ -18,8 +19,10 @@
         $param = $login;
         $param_json = json_encode($param);
     }
-
-?>
+    
+    ?>
+    
+   
 
 
 <!DOCTYPE html>

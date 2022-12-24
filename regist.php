@@ -92,6 +92,7 @@ if(!empty($family_name) && !empty($last_name) && !empty($family_name_kana) && !e
     <meta charset="UTF-8">
     <link rel = "stylesheet" type = "text/css" href = "style2.css">
     <title>アカウント登録画面</title>
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
             <script>
             var param = JSON.parse('<?php echo $param_json; ?>');
@@ -194,11 +195,12 @@ if(!empty($family_name) && !empty($last_name) && !empty($family_name_kana) && !e
                     </li>
                     <li>
                         <label class = "form_name">パスワード</label>
-                        <input type = "password" name = "password" class = "form_item" pattern = "[0-9a-zA-Z]{0,10}" value = <?php if(isset($password)){
+                        <input type = "password" id="textPassword" name = "password" class = "form_item" pattern = "[0-9a-zA-Z]{0,10}" value = <?php if(isset($password)){
                                                                                                                                     echo $password;
                                                                                                                                 }elseif(isset($password_return)){
                                                                                                                                     echo $password_return;                                                                                                                                 
                                                                                                                                 }?>> <!--半角英数字10文字まで-->
+                        <span id="buttonEye" class="fa fa-eye" onclick="pushHideButton()"></span>
                         <?php if(!empty($error6)):?>
                             <p class="text-danger"><?php echo $error6 ?></p>
                         <?php endif; ?>
@@ -510,7 +512,20 @@ if(!empty($family_name) && !empty($last_name) && !empty($family_name_kana) && !e
                     </li>
                     <li><input type = "submit" class = "submit" value="確認する"></li>
                 </ul>       
-            </form>          
+            </form>
+            <script language="javascript">//パスワード表示・非表示
+                function pushHideButton() {
+                    var txtPass = document.getElementById("textPassword");
+                    var btnEye = document.getElementById("buttonEye");
+                    if (txtPass.type === "text") {
+                        txtPass.type = "password";
+                        btnEye.className = "fa fa-eye";
+                    } else {
+                            txtPass.type = "text";
+                            btnEye.className = "fa fa-eye-slash";
+                    }
+                }
+            </script>          
      
     </main>
     <footer>Copyright D.I.Works | D.I.blog is the one which provides A to Z about programming</footer>

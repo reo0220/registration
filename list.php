@@ -13,7 +13,7 @@
             $param_json = json_encode($param);
         }
 
-
+        unset($_SESSION['family_name_send']);
 
 
 ?>
@@ -58,6 +58,14 @@
         </script>
     </head>
     <body>
+        <SCRIPT language="JavaScript">
+            function msgdsp() {
+                alert("選択したアカウト情報は更新できません。");
+            }
+            function msgdsp2() {
+                alert("選択したアカウトは既に削除操作が行われています。");
+            }
+        </SCRIPT>
         <img src ="diblog_logo.jpg">
         <ul class = "a">
             <li>トップ</li>
@@ -234,14 +242,14 @@
                         echo"<td>".date('Y/m/d',strtotime($row['update_time']))."</td>";
                         echo"<td>";
                         if($row['delete_flag']==="1"){
-                            echo "<button><a href = 'list.php'>更新</a></button>";//削除フラグが有効な場合、「更新」「削除」画面へ移動できないようにする
+                            echo "<button onclick='msgdsp()'><a href = 'list.php'>更新</a></button>";//削除フラグが有効な場合、「更新」「削除」画面へ移動できないようにする
                         }else{
                             echo "<button><a href = 'update.php?user_id=$row[id]'>更新</a></button>";//パラメータにidを渡す
                         }
                         echo "</td>";
                         echo"<td>";
                         if($row['delete_flag']==="1"){
-                            echo "<button><a href = 'list.php'>削除</a></button>";
+                            echo "<button onclick='msgdsp2()'><a href = 'list.php'>削除</a></button>";
                         }else{
                             echo "<button><a href = 'delete.php?user_id=$row[id]'>削除</a></button>";//パラメータにidを渡す
                         }
