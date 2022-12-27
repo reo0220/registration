@@ -21,18 +21,18 @@ if(empty($_POST['family_name'])){//ログインしていて「アカウント更
     $param_json2 = json_encode($param2);
 }
 
-$_SESSION['family_name_send'] = $_POST['family_name'];
-$_SESSION['last_name_send'] = $_POST['last_name'];
-$_SESSION['family_name_kana_send'] = $_POST['family_name_kana'];
-$_SESSION['last_name_kana_send'] = $_POST['last_name_kana'];
-$_SESSION['mail_send'] = $_POST['mail'];
-$_SESSION['password_send'] = $_POST['password'];
-$_SESSION['gender_send'] = $_POST['gender'];
-$_SESSION['postal_code_send'] = $_POST['postal_code'];
-$_SESSION['prefecture_send'] = $_POST['prefecture'];
-$_SESSION['address_1_send'] = $_POST['address_1'];
-$_SESSION['address_2_send'] = $_POST['address_2'];
-$_SESSION['authority_send'] = $_POST['authority'];
+$_SESSION['family_name_send2'] = $_POST['family_name'];
+$_SESSION['last_name_send2'] = $_POST['last_name'];
+$_SESSION['family_name_kana_send2'] = $_POST['family_name_kana'];
+$_SESSION['last_name_kana_send2'] = $_POST['last_name_kana'];
+$_SESSION['mail_send2'] = $_POST['mail'];
+$_SESSION['password_send2'] = $_POST['password'];
+$_SESSION['gender_send2'] = $_POST['gender'];
+$_SESSION['postal_code_send2'] = $_POST['postal_code'];
+$_SESSION['prefecture_send2'] = $_POST['prefecture'];
+$_SESSION['address_1_send2'] = $_POST['address_1'];
+$_SESSION['address_2_send2'] = $_POST['address_2'];
+$_SESSION['authority_send2'] = $_POST['authority'];
 ?>
 
 <!DOCTYPE html>

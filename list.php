@@ -88,23 +88,45 @@
                         <table border = '1' cellpadding='0' cellspacing='0' width = "1000px">
                         <tr>
                             <td><label>名前(姓)</label></td>
-                            <td><input class = "list_input"type = "text" name = "family_name" pattern="[\u4E00-\u9FFF\u3040-\u309Fー]{0,10}"></td>
+                            <td><input class = "list_input"type = "text" name = "family_name" pattern="[\u4E00-\u9FFF\u3040-\u309Fー]{0,10}" value = <?php if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                                                                                                                                                                                    echo $_POST['family_name'];
+                                                                                                                                                                                    }?>></td>
                             <td><label>名前(名)</label></td>
-                            <td><input class = "list_input" type = "text" name = "last_name" pattern="[\u4E00-\u9FFF\u3040-\u309Fー]{0,10}"></td>
+                            <td><input class = "list_input" type = "text" name = "last_name" pattern="[\u4E00-\u9FFF\u3040-\u309Fー]{0,10}" value = <?php if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                                                                                                                                                                                    echo $_POST['last_name'];
+                                                                                                                                                                                    }?>></td>
                         </tr> 
                         <tr>
                             <td><label>カナ（姓）</label></td>
-                            <td><input class = "list_input" type = "text" name = "family_name_kana" pattern="[\u30A1-\u30F6]{0,10}"></td>
+                            <td><input class = "list_input" type = "text" name = "family_name_kana" pattern="[\u30A1-\u30F6]{0,10}" value = <?php if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                                                                                                                                                                                    echo $_POST['family_name_kana'];
+                                                                                                                                                                                    }?>></td>
                             <td><label>カナ（名）</label></td>
-                            <td><input class = "list_input" type = "text" name = "last_name_kana" pattern="[\u30A1-\u30F6]{0,10}"></td>
+                            <td><input class = "list_input" type = "text" name = "last_name_kana" pattern="[\u30A1-\u30F6]{0,10}" value = <?php if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                                                                                                                                                                                    echo $_POST['last_name_kana'];
+                                                                                                                                                                                    }?>></td>
                         </tr>   
                         <tr>
                             <td><label>メールアドレス</label></td>
-                            <td><input class = "list_input" type = "text" name = "mail" maxlength = "100"></td>
+                            <td><input class = "list_input" type = "text" name = "mail" maxlength = "100" value = <?php if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                                                                                                                                                            echo $_POST['mail'];
+                                                                                                                                                                }?>></td>
                             <td><label>性別</label></td>
                             <td>
-                                <input type = "radio" name = "gender" value = "男" onclick="radioDeselection(this, 1)">男
-                                <input type = "radio" name = "gender" value = "女"onclick="radioDeselection(this, 2)">女
+                                <input type = "radio" name = "gender" value = "男" onclick="radioDeselection(this, 1)" <?php if($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['gender'])){
+                                                                                                                                                                    $gender_value = $_POST['gender'];
+                                                                                                                                                                    if($gender_value === "男"){
+                                                                                                                                                                        echo "checked";
+                                                                                                                                                                    }else{
+                                                                                                                                                                        echo "";
+                                                                                                                                                                    }}?>>男
+                                <input type = "radio" name = "gender" value = "女"onclick="radioDeselection(this, 2)" <?php if($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST['gender'])){
+                                                                                                                                                                    $gender_value = $_POST['gender'];
+                                                                                                                                                                    if($gender_value === "女"){
+                                                                                                                                                                        echo "checked";
+                                                                                                                                                                    }else{
+                                                                                                                                                                        echo "";
+                                                                                                                                                                    }}?>>女
                             </td>
                         </tr>
                         <tr>
@@ -112,8 +134,20 @@
                             <td>
                                 <select class = "list_pull"name = "authority">
                                     <option value = ""></option>
-                                    <option value = "一般">一般</option>
-                                    <option value = "管理者">管理者</option>
+                                    <option value = "一般" <?php if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                                                                                                    $authority_value = $_POST['authority'];
+                                                                                                    if($authority_value === "一般"){
+                                                                                                        echo "selected";
+                                                                                                    }else{
+                                                                                                        echo "";
+                                                                                                    }}?>>一般</option>
+                                    <option value = "管理者" <?php if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                                                                                                    $authority_value = $_POST['authority'];
+                                                                                                    if($authority_value === "管理者"){
+                                                                                                        echo "selected";
+                                                                                                    }else{
+                                                                                                        echo "";
+                                                                                                    }}?>>管理者</option>
                                 </select> 
                             </td>  
                             <td colspan='2'></td>
@@ -128,15 +162,10 @@
                     
                         //検索されたデータを変数に格納
                         $family_name = $_POST['family_name'];
-                        $family_name2 = '%'.$_POST['family_name'].'%';
                         $last_name = $_POST['last_name'];
-                        $last_name2 = '%'.$_POST['last_name'].'%';
                         $family_name_kana = $_POST['family_name_kana'];
-                        $family_name_kana2 = '%'.$_POST['family_name_kana'].'%';
                         $last_name_kana = $_POST['last_name_kana'];
-                        $last_name_kana2 = '%'.$_POST['last_name_kana'].'%';
                         $mail = $_POST['mail'];
-                        $mail2 = '%'.$_POST['mail'].'%';
                         
                         if(empty($_POST['gender'])){//性別が何も選択していない時
                             $gender = "NULL";

@@ -22,18 +22,18 @@ if(empty($_GET["user_id"])){//ログインしていて「アカウント一覧�
 }
     if(isset($_SESSION['family_name_send'])):{//$_SESSION['family_name_send']に値が入っているとき
 
-    $family_name_return = $_SESSION['family_name_send']; //$family_name_kana_returnにセッション変数に入っている値を代入
-    $last_name_return = $_SESSION['last_name_send']; 
-    $family_name_kana_return = $_SESSION['family_name_kana_send'];
-    $last_name_kana_return = $_SESSION['last_name_kana_send']; 
-    $mail_return = $_SESSION['mail_send']; 
-    $password_return = $_SESSION['password_send']; 
-    $gender_return = $_SESSION['gender_send']; 
-    $postal_code_return = $_SESSION['postal_code_send']; 
-    $prefecture_return = $_SESSION['prefecture_send']; 
-    $address_1_return = $_SESSION['address_1_send']; 
-    $address_2_return = $_SESSION['address_2_send']; 
-    $authority_return = $_SESSION['authority_send'];
+    $family_name_return = $_SESSION['family_name_send2']; //$family_name_kana_returnにセッション変数に入っている値を代入
+    $last_name_return = $_SESSION['last_name_send2']; 
+    $family_name_kana_return = $_SESSION['family_name_kana_send2'];
+    $last_name_kana_return = $_SESSION['last_name_kana_send2']; 
+    $mail_return = $_SESSION['mail_send2']; 
+    $password_return = $_SESSION['password_send2']; 
+    $gender_return = $_SESSION['gender_send2']; 
+    $postal_code_return = $_SESSION['postal_code_send2']; 
+    $prefecture_return = $_SESSION['prefecture_send2']; 
+    $address_1_return = $_SESSION['address_1_send2']; 
+    $address_2_return = $_SESSION['address_2_send2']; 
+    $authority_return = $_SESSION['authority_send2'];
     } 
 ?>
 <?php endif;?>
